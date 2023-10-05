@@ -37,25 +37,25 @@
 
     <script>
         function convertToUndecimal() {
-            let decimalValue = parseInt(document.getElementById("decimalInput").value);
-            let undecimalValue = "";
-            const symbols = ["6", "L", "w", "d", "q", "o", "p", "b", "m", "7", "9"];
-            
-            while (decimalValue !== 0) {
-                let remainder = decimalValue % 11;
-                decimalValue = Math.floor(decimalValue / 11);
-                
-                // Adjust for negative remainders
-                if (remainder < 0) {
-                    remainder += 11;
-                    decimalValue += 1;
-                }
-                
-                undecimalValue = symbols[remainder] + undecimalValue;
-            }
-
-            document.getElementById("undecimalOutput").value = undecimalValue || "o";
+    let decimalValue = parseInt(document.getElementById("decimalInput").value);
+    let undecimalValue = "";
+    const symbols = ["6", "L", "w", "d", "q", "o", "p", "b", "m", "7", "9"];
+    
+    while (decimalValue !== 0) {
+        let remainder = decimalValue % 11;
+        decimalValue = Math.floor(decimalValue / 11);
+        
+        // Adjust for negative remainders
+        if (remainder < 0) {
+            remainder += 11;
+            decimalValue += 1;
         }
+        
+        undecimalValue = symbols[5 + remainder] + undecimalValue;
+    }
+
+    document.getElementById("undecimalOutput").value = undecimalValue || "o";
+}
     </script>
 </body>
 </html>
