@@ -52,13 +52,7 @@ function undecimalToDecimal(undecimalStr) {
     let decimal = 0;
     for(let i = 0; i < undecimalStr.length; i++) {
         let symbol = undecimalStr[i];
-        if (symbolToValue[symbol] < 0) {
-            // Use the positive inverse and subtract its value
-            symbol = positiveInverse[symbol];
-            decimal = decimal * 11 - symbolToValue[symbol];
-        } else {
-            decimal = decimal * 11 + symbolToValue[symbol];
-        }
+        decimal = decimal * 11 + symbolToValue[symbol];
     }
     return decimal;
 }
@@ -81,29 +75,52 @@ function decimalToUndecimal(decimalValue) {
     return undecimalValue || "o";
 }
 
+function adjustForNegatives(undecimal1, undecimal2, operation) {
+    undecimal1 = undecimal1.toLowerCase();
+    undecimal2 = undecimal2.toLowerCase();
+    let adjustedUndecimal1 = "";
+    let adjustedUndecimal2 = "";
+
+    for (let char of undecimal1) {
+        if (symbolToValue[char] < 0) {
+            adjustedUndecimal1 += positiveInverse[char];
+            if (operation === '+') operation = '-';
+            else if (operation === '-') operation = '+';
+        } else {
+            adjustedUndecimal1 += char;
+        }
+    }
+
+    for (let char of undecimal2) {
+        if (symbolToValue[char] < 0) {
+            adjustedUndecimal2 += positiveInverse[char];
+            if (operation === '+') operation = '-';
+            else if (operation === '-') operation = '+';
+        } else {
+            adjustedUndecimal2 += char;
+        }
+    }
+
+    return [adjustedUndecimal1, adjustedUndecimal2, operation];
+}
+
 function performOperation(operation) {
-    const input1 = document.getElementById("input1").value;
-    const input2 = document.getElementById("input2").value;
-    const decimal1 = undecimalToDecimal(input1);
-    const decimal2 = undecimalToDecimal(input2);
-    let decimalResult;
+    let input1 = document.getElementById("input1").value;
+    let input2 = document.getElementById("input2").value;
+    let result;
+
+    [input1, input2, operation] = adjustForNegatives(input1, input2, operation);
 
     switch(operation) {
-        case '+': decimalResult = decimal1 + decimal2; break;
-        case '-': decimalResult = decimal1 - decimal2; break;
-        case '*': decimalResult = decimal1 * decimal2; break;
-        case '/': decimalResult = decimal1 / decimal2; break;
+        case '+': result = decimalToUndecimal(undecimalToDecimal(input1) + undecimalToDecimal(input2)); break;
+        case '-': result = decimalToUndecimal(undecimalToDecimal(input1) - undecimalToDecimal(input2)); break;
+        case '*': result = decimalToUndecimal(undecimalToDecimal(input1) * undecimalToDecimal(input2)); break;
+        case '/': result = divideAsFraction(input1, input2); break;
     }
 
-    const undecimalResult = decimalToUndecimal(decimalResult);
-    document.getElementById("undecimalResult").value = undecimalResult;
-
-    if (document.getElementById("showDecimal").checked) {
-        document.getElementById("decimalResult").value = decimalResult.toFixed(2);
-    } else {
-        document.getElementById("decimalResult").value = "";
-    }
+    document.getElementById("undecimalResult").value = result;
 }
+
 
     </script>
 </body>
