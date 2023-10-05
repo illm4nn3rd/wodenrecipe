@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Balanced Undecimal Calculator</title>
+    <style>
+        /* Basic styling for the calculator */
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+        .calculator {
+            display: inline-block;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            padding: 10px 20px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="calculator">
+        <h2>Balanced Undecimal Calculator</h2>
+        <label for="decimalInput">Decimal Number:</label>
+        <input type="number" id="decimalInput" placeholder="Enter a decimal number">
+        <br>
+        <button onclick="convertToUndecimal()">Convert to Undecimal</button>
+        <br>
+        <label for="undecimalOutput">Balanced Undecimal:</label>
+        <input type="text" id="undecimalOutput" readonly>
+    </div>
+
+    <script>
+        function convertToUndecimal() {
+            // Get the input value
+            let decimalValue = document.getElementById("decimalInput").value;
+
+            // Conversion logic (placeholder, you'll need to implement the actual conversion)
+            let undecimalValue = "Conversion Logic Here";
+
+            // Display the result
+            document.getElementById("undecimalOutput").value = undecimalValue;
+        }
+    </script>
+</body>
+</html>
