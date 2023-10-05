@@ -24,19 +24,17 @@
             width: 200px;
         }
         footer {
-        margin-top: 20px;
-        font-size: 0.8em;
-        color: #888;
-        }
+    margin-top: 20px;
+    font-size: 0.8em;
+    color: #888;
+}
+
     </style>
 </head>
 <body>
     <div class="calculator">
         <h2>Balanced Undecimal Calculator</h2>
         <input type="text" id="inputField" placeholder="Enter calculation">
-        <br>
-        <button onclick="calculate()">=</button>
-        <input type="text" id="outputField" readonly>
         <br>
         <button onclick="appendToInput('d')">d</button>
         <button onclick="appendToInput('q')">q</button>
@@ -56,10 +54,14 @@
         <button onclick="appendToInput('×')">×</button>
         <button onclick="appendToInput('+')">+</button>
         <button onclick="appendToInput('/')">/</button>
-    <footer>
-        Version: 1.0
-    </footer>
-</div>
+        <button onclick="calculate()">=</button>
+        <br>
+        <input type="text" id="outputField" readonly>
+        <br>
+        <footer>
+            Version: o.op
+        </footer>
+    </div>
 
     <script>
         // Define the symbols and their corresponding values
@@ -116,7 +118,7 @@
             return undecimalStr;
         }
 
-        // Perform the calculation based on the input
+        // Perform the arithmetic operation and display the result
         function calculate() {
             const inputField = document.getElementById('inputField');
             const inputStr = inputField.value;
