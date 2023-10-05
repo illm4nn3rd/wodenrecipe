@@ -59,7 +59,7 @@
         <input type="text" id="outputField" readonly>
         <br>
         <footer>
-            Version: o.ob
+            Version: o.om
         </footer>
     </div>
 
@@ -111,16 +111,28 @@
 
         // Convert from unbalanced base 11 to balanced undecimal
         function unbalancedToBalanced(unbalancedStr) {
-            let undecimalStr = '';
-            for (let char of unbalancedStr) {
-                let value = parseInt(char);
-                if (value > 5) {
-                    value -= 11;
-                }
-                undecimalStr += undecimalSymbols[value + 5];
-            }
-            return undecimalStr;
+    let undecimalStr = '';
+    let carry = 0;
+    for (let i = unbalancedStr.length - 1; i >= 0; i--) {
+        let value = parseInt(unbalancedStr[i]) + carry;
+        if (value > 5) {
+            value -= 11;
+            carry = 1;
+        } else if (value < -5) {
+            value += 11;
+            carry = -1;
+        } else {
+            carry = 0;
         }
+        undecimalStr = undecimalSymbols[value + 5] + undecimalStr;
+    }
+    // If there's still a carry after processing all digits
+    if (carry !== 0) {
+        undecimalStr = undecimalSymbols[carry + 5] + undecimalStr;
+    }
+    return undecimalStr;
+}
+
 
         // Perform the arithmetic operations and display the result
         function calculate() {
