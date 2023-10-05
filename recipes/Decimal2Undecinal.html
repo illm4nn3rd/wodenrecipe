@@ -54,7 +54,10 @@
             quotient -= 1;
         }
         
-        undecimalValue = symbols[5 + remainder] + undecimalValue;
+        // Map the balanced remainder to the correct symbol
+        undecimalValue = symbols[remainder + 5] + undecimalValue;
+        
+        // Update the number for the next iteration
         decimalValue = quotient;
     }
 
