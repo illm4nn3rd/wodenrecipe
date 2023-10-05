@@ -39,9 +39,29 @@
         function convertToUndecimal() {
             // Get the input value
             let decimalValue = document.getElementById("decimalInput").value;
+function convertToUndecimal() {
+    let decimalValue = parseInt(document.getElementById("decimalInput").value);
+    let undecimalValue = "";
+    const symbols = ["6", "L", "w", "d", "q", "o", "p", "b", "m", "7", "9"];
+    
+    while (decimalValue !== 0) {
+        let remainder = decimalValue % 11;
+        decimalValue = Math.floor(decimalValue / 11);
+        
+        // Adjust for negative remainders
+        if (remainder < 0) {
+            remainder += 11;
+            decimalValue += 1;
+        }
+        
+        undecimalValue = symbols[remainder] + undecimalValue;
+    }
+
+    document.getElementById("undecimalOutput").value = undecimalValue || "o";
+}
 
             // Conversion logic (placeholder, you'll need to implement the actual conversion)
-            let undecimalValue = "Conversion Logic Here";
+           // let undecimalValue = "Conversion Logic Here";
 
             // Display the result
             document.getElementById("undecimalOutput").value = undecimalValue;
