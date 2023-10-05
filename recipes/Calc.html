@@ -30,6 +30,11 @@
         <h2>Balanced Undecimal Calculator</h2>
         <input type="text" id="inputField" readonly>
         <div class="buttons">
+            <button onclick="appendToInput('6')">6</button>
+            <button onclick="appendToInput('L')">L</button>
+            <button onclick="appendToInput('w')">w</button>
+            <button onclick="appendToInput('d')">d</button>
+            <button onclick="appendToInput('q')">q</button>
             <button onclick="appendToInput('o')">o</button>
             <button onclick="appendToInput('p')">p</button>
             <button onclick="appendToInput('b')">b</button>
@@ -51,8 +56,8 @@
     </div>
 
     <script>
-        const undecimalSymbols = ['o', 'p', 'b', 'm', '7', '9'];
-        const undecimalValues = [0, 1, 2, 3, 4, 5];
+        const undecimalSymbols = ['6', 'L', 'w', 'd', 'q', 'o', 'p', 'b', 'm', '7', '9'];
+        const undecimalValues = [-5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5];
 
         function appendToInput(symbol) {
             const inputField = document.getElementById("inputField");
@@ -85,16 +90,17 @@
         function undecimalToDecimal(undecimalStr) {
             let decimalValue = 0;
             for (let i = 0; i < undecimalStr.length; i++) {
-                decimalValue = decimalValue * 6 + undecimalValues[undecimalSymbols.indexOf(undecimalStr[i])];
+                decimalValue = decimalValue * 11 + undecimalValues[undecimalSymbols.indexOf(undecimalStr[i])];
             }
             return decimalValue;
         }
 
         function decimalToUndecimal(decimalValue) {
             let undecimalStr = '';
-            while (decimalValue > 0) {
-                undecimalStr = undecimalSymbols[decimalValue % 6] + undecimalStr;
-                decimalValue = Math.floor(decimalValue / 6);
+            while (decimalValue !== 0) {
+                const remainder = decimalValue % 11;
+                decimalValue = (decimalValue - remainder) / 11;
+                undecimalStr = undecimalSymbols[remainder + 5] + undecimalStr;
             }
             return undecimalStr || 'o';
         }
