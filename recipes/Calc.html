@@ -34,14 +34,14 @@
         button {
             padding: 10px 20px;
             margin: 5px;
-            color: #fff;
             cursor: pointer;
             transition: background-color 0.3s;
+            border: 2px solid #000;
         }
 
         /* Adjust button colors based on their associated values */
-        button[data-undecimal="o"] { background-color: #000; color: #fff; } /* 0 */
-        button[data-undecimal="q"], button[data-undecimal="p"] { background-color: #E5E4E2; } /* lightest gray */
+        button[data-undecimal="o"] { background-color: #fff; color: #000; border: 2px solid #808080; } /* 0 */
+        button[data-undecimal="q"], button[data-undecimal="p"] { background-color: #E5E4E2; color: #000; } /* lightest gray */
         button[data-undecimal="d"], button[data-undecimal="b"] { background-color: #D3D3D3; } /* second lightest gray */
         button[data-undecimal="w"], button[data-undecimal="m"] { background-color: #C0C0C0; } /* middle gray */
         button[data-undecimal="L"], button[data-undecimal="7"] { background-color: #A9A9A9; } /* second darkest gray */
@@ -64,6 +64,7 @@
         }
     </style>
 </head>
+
 
 <body>
     <div class="calculator">
