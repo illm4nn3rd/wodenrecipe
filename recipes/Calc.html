@@ -5,55 +5,62 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Balanced Undecimal Calculator</title>
-<style>
-    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Armenian:wght@400;700&display=swap');
+    <link href="https://fonts.googleapis.com/css2?family=Kurale&display=swap" rel="stylesheet">
 
-    body {
-        font-family: 'Arial', sans-serif; /* Brutalist Helvetica-like font */
-        text-align: center;
-        margin-top: 50px;
-        background-color: #f4f4f4;
-    }
+    <style>
+        body {
+            font-family: 'Kurale', serif;
+            text-align: center;
+            margin-top: 50px;
+            background-color: #ffffff;
+            color: #000000;
+        }
 
-    .calculator {
-        display: inline-block;
-        padding: 20px;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        background-color: #fff;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    }
+        .calculator {
+            display: inline-block;
+            padding: 20px;
+            border: 1px solid #000000;
+            background-color: #ffffff;
+        }
 
-    button {
-        padding: 10px 20px;
-        margin: 5px;
-        border: none;
-        border-radius: 5px;
-        background-color: #007BFF;
-        color: #fff;
-        cursor: pointer;
-        transition: background-color 0.3s;
-        font-family: 'Arial', sans-serif; /* Brutalist Helvetica-like font */
-    }
+        button {
+            padding: 10px 20px;
+            margin: 5px;
+            border: 1px solid #000000;
+            background-color: #ffffff;
+            color: #000000;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
 
-    button[data-undecimal], input, footer {
-        font-family: 'Noto Sans Armenian', sans-serif; /* Armenian font for undecimal symbols */
-    }
+        button[data-undecimal] {
+            background-color: function(value) {
+                const undecimalValues = {
+                    '6': -5, 'L': -4, 'w': -3, 'd': -2, 'q': -1,
+                    'o': 0,
+                    'p': 1, 'b': 2, 'm': 3, '7': 4, '9': 5
+                };
+                const grayValue = 255 - (undecimalValues[value] + 5) * 20;
+                return `rgb(${grayValue}, ${grayValue}, ${grayValue})`;
+            };
+        }
 
-    input {
-        width: 200px;
-        padding: 10px;
-        margin: 5px 0;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-    }
+        input {
+            width: 200px;
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #000000;
+            background-color: #ffffff;
+            color: #000000;
+        }
 
-    footer {
-        margin-top: 20px;
-        font-size: 0.8em;
-        color: #888;
-    }
-</style>
+        footer {
+            margin-top: 20px;
+            font-size: 0.8em;
+            color: #888888;
+        }
+    </style>
+
 
 </head>
 
@@ -85,7 +92,7 @@
         <input type="text" id="outputField" readonly>
         <br>
         <footer>
-            Version: o.pL
+            Version: o.pw
         </footer>
     </div>
 
