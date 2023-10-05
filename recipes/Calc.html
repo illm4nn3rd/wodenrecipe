@@ -58,45 +58,32 @@
 
     <script>
         const undecimalSymbols = ['6', 'L', 'w', 'd', 'q', 'o', 'p', 'b', 'm', '7', '9'];
-        const undecimalValues = [-5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5];
+const undecimalValues = {
+    '6': -5, 'L': -4, 'w': -3, 'd': -2, 'q': -1,
+    'o': 0,
+    'p': 1, 'b': 2, 'm': 3, '7': 4, '9': 5
+};
 
-        function appendToInput(symbol) {
-            const inputField = document.getElementById("inputField");
-            inputField.value += symbol;
-        }
+function appendToInput(symbol) {
+    const inputField = document.getElementById('inputField');
+    inputField.value += symbol;
+}
 
-        function clearInput() {
-            document.getElementById("inputField").value = "";
-            document.getElementById("outputField").value = "";
-        }
+function clearInput() {
+    const inputField = document.getElementById('inputField');
+    inputField.value = '';
+    document.getElementById('outputField').value = '';
+}
 
-        function calculate() {
-            const input = document.getElementById("inputField").value;
-            let result;
+function undecimalToDecimal(undecimalStr) {
+    let decimalValue = 0;
+    for (let i = 0; i < undecimalStr.length; i++) {
+        decimalValue = decimalValue * 11 + undecimalValues[undecimalStr[i]];
+    }
+    return decimalValue;
+}
 
-            if (input.includes('+')) {
-                const [a, b] = input.split('+');
-                result = addUndecimal(a, b);
-            } else if (input.includes('×')) {
-                const [a, b] = input.split('×');
-                result = multiplyUndecimal(a, b);
-            } else if (input.includes('/')) {
-                const [a, b] = input.split('/');
-                result = undecimalToFraction(a + '/' + b);
-            }
-
-            document.getElementById("outputField").value = result;
-        }
-
-        function undecimalToDecimal(undecimalStr) {
-            let decimalValue = 0;
-            for (let i = 0; i < undecimalStr.length; i++) {
-                decimalValue = decimalValue * 11 + undecimalValues[undecimalSymbols.indexOf(undecimalStr[i])];
-            }
-            return decimalValue;
-        }
-
-        function decimalToUndecimal(decimalValue) {
+function decimalToUndecimal(decimalValue) {
     let undecimalStr = '';
     while (decimalValue !== 0) {
         let remainder = decimalValue % 11;
@@ -113,21 +100,45 @@
     return undecimalStr || 'o';
 }
 
+function calculate() {
+    const inputField = document.getElementById('inputField');
+    const inputStr = inputField.value;
 
-        function addUndecimal(a, b) {
-            const decimalResult = undecimalToDecimal(a) + undecimalToDecimal(b);
-            return decimalToUndecimal(decimalResult);
-        }
+    // Split the input string by the operation
+    let operands, operation;
+    if (inputStr.includes('+')) {
+        operands = inputStr.split('+');
+        operation = '+';
+    } else if (inputStr.includes('×')) {
+        operands = inputStr.split('×');
+        operation = '×';
+    } else if (inputStr.includes('/')) {
+        operands = inputStr.split('/');
+        operation = '/';
+    } else {
+        return;
+    }
 
-        function multiplyUndecimal(a, b) {
-            const decimalResult = undecimalToDecimal(a) * undecimalToDecimal(b);
-            return decimalToUndecimal(decimalResult);
-        }
+    const operand1Decimal = undecimalToDecimal(operands[0]);
+    const operand2Decimal = undecimalToDecimal(operands[1]);
+    let resultDecimal;
 
-        function undecimalToFraction(undecimalFraction) {
-            const [numerator, denominator] = undecimalFraction.split('/');
-            return `${decimalToUndecimal(undecimalToDecimal(numerator))}/${decimalToUndecimal(undecimalToDecimal(denominator))}`;
-        }
+    switch (operation) {
+        case '+':
+            resultDecimal = operand1Decimal + operand2Decimal;
+            break;
+        case '×':
+            resultDecimal = operand1Decimal * operand2Decimal;
+            break;
+        case '/':
+            resultDecimal = operand1Decimal / operand2Decimal;
+            break;
+    }
+
+    const resultUndecimal = decimalToUndecimal(resultDecimal);
+    document.getElementById('outputField').value = resultUndecimal;
+}
+
     </script>
 </body>
 </html>
