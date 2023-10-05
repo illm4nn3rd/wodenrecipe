@@ -43,19 +43,24 @@
     
     while (decimalValue !== 0) {
         let remainder = decimalValue % 11;
-        decimalValue = Math.floor(decimalValue / 11);
+        let quotient = Math.floor(decimalValue / 11);
         
-        // Adjust for negative remainders
-        if (remainder < 0) {
+        // Balancing the remainder
+        if (remainder > 5) {
+            remainder -= 11;
+            quotient += 1;
+        } else if (remainder < -5) {
             remainder += 11;
-            decimalValue += 1;
+            quotient -= 1;
         }
         
         undecimalValue = symbols[5 + remainder] + undecimalValue;
+        decimalValue = quotient;
     }
 
     document.getElementById("undecimalOutput").value = undecimalValue || "o";
 }
+
     </script>
 </body>
 </html>
