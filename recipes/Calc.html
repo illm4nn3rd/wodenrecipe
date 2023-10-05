@@ -1,71 +1,80 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Balanced Undecimal Calculator</title>
     <style>
-    body {
-        font-family: 'Georgia', serif;
-        text-align: center;
-        margin-top: 50px;
-        background-color: #f4f4f4;
-    }
-    .calculator {
-        display: inline-block;
-        padding: 20px;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        background-color: #fff;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    }
-    button {
-        padding: 10px 20px;
-        margin: 5px;
-        border: none;
-        border-radius: 5px;
-        background-color: #007BFF;
-        color: #fff;
-        cursor: pointer;
-        transition: background-color 0.3s;
-    }
-    button:hover {
-        background-color: #0056b3;
-    }
-    input {
-        width: 200px;
-        padding: 10px;
-        margin: 5px 0;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-    }
-    footer {
-        margin-top: 20px;
-        font-size: 0.8em;
-        color: #888;
-    }
-</style>
+        @import url('https://fonts.googleapis.com/css2?family=Computer+Modern+Serif&display=swap');
 
+        body {
+            font-family: 'Arial', sans-serif; /* Brutalist Helvetica-like font */
+            text-align: center;
+            margin-top: 50px;
+            background-color: #f4f4f4;
+        }
+
+        .calculator {
+            display: inline-block;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        button {
+            padding: 10px 20px;
+            margin: 5px;
+            border: none;
+            border-radius: 5px;
+            background-color: #007BFF;
+            color: #fff;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            font-family: 'Arial', sans-serif; /* Brutalist Helvetica-like font */
+        }
+
+        button[data-undecimal] {
+            font-family: 'Computer Modern Serif', serif; /* Fancy math font */
+        }
+
+        input {
+            width: 200px;
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        footer {
+            margin-top: 20px;
+            font-size: 0.8em;
+            color: #888;
+        }
+    </style>
 </head>
+
 <body>
     <div class="calculator">
         <h2>Balanced Undecimal Calculator</h2>
         <input type="text" id="inputField" placeholder="Enter calculation">
         <br>
-        <button onclick="appendToInput('d')">d</button>
-        <button onclick="appendToInput('q')">q</button>
-        <button onclick="appendToInput('p')">p</button>
-        <button onclick="appendToInput('b')">b</button>
+        <button data-undecimal onclick="appendToInput('6')">6</button>
+        <button data-undecimal onclick="appendToInput('L')">L</button>
+        <button data-undecimal onclick="appendToInput('7')">7</button>
+        <button data-undecimal onclick="appendToInput('9')">9</button>
         <br>
-        <button onclick="appendToInput('L')">L</button>
-        <button onclick="appendToInput('w')">w</button>
-        <button onclick="appendToInput('m')">m</button>
-        <button onclick="appendToInput('7')">7</button>
+        <button data-undecimal onclick="appendToInput('d')">d</button>
+        <button data-undecimal onclick="appendToInput('q')">q</button>
+        <button data-undecimal onclick="appendToInput('p')">p</button>
+        <button data-undecimal onclick="appendToInput('b')">b</button>
         <br>
-        <button onclick="appendToInput('6')">6</button>
-        <button onclick="appendToInput('o')">o</button>
+        <button data-undecimal onclick="appendToInput('w')">w</button>
+        <button data-undecimal onclick="appendToInput('o')">o</button>
         <button onclick="clearInput()">C</button>
-        <button onclick="appendToInput('9')">9</button>
+        <button data-undecimal onclick="appendToInput('m')">m</button>
         <br>
         <button onclick="appendToInput('×')">×</button>
         <button onclick="appendToInput('+')">+</button>
@@ -75,9 +84,10 @@
         <input type="text" id="outputField" readonly>
         <br>
         <footer>
-            Version: o.o7
+            Version: o.o9
         </footer>
     </div>
+
 
     <script>
         // Define the symbols and their corresponding values
