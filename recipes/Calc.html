@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Balanced Undecimal Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+        .calculator {
+            display: inline-block;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            padding: 10px 20px;
+            margin: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="calculator">
+        <h2>Balanced Undecimal Calculator</h2>
+        <input type="text" id="input1" placeholder="Enter first undecimal number">
+        <input type="text" id="input2" placeholder="Enter second undecimal number">
+        <br>
+        <button onclick="performOperation('+')">+</button>
+        <button onclick="performOperation('-')">-</button>
+        <button onclick="performOperation('*')">*</button>
+        <button onclick="performOperation('/')">/</button>
+        <br>
+        <label for="undecimalResult">Result (Undecimal):</label>
+        <input type="text" id="undecimalResult" readonly>
+        <br>
+        <input type="checkbox" id="showDecimal"> Show result in decimal
+        <br>
+        <label for="decimalResult">Result (Decimal):</label>
+        <input type="text" id="decimalResult" readonly>
+    </div>
+
+    <script>
+        const symbols = ["6", "L", "w", "d", "q", "o", "p", "b", "m", "7", "9"];
+        
+        function undecimalToDecimal(undecimal) {
+            let decimal = 0;
+            for (let i = 0; i < undecimal.length; i++) {
+                decimal = decimal * 11 + (symbols.indexOf(undecimal[i]) - 5);
+            }
+            return decimal;
+        }
+
+        function decimalToUndecimal(decimalValue) {
+            let undecimalValue = "";
+            while (decimalValue !== 0) {
+                let remainder = decimalValue % 11;
+                let quotient = Math.floor(decimalValue / 11);
+                if (remainder > 5) {
+                    remainder -= 11;
+                    quotient += 1;
+                } else if (remainder < -5) {
+                    remainder += 11;
+                    quotient -= 1;
+                }
+                undecimalValue = symbols[remainder + 5] + undecimalValue;
+                decimalValue = quotient;
+            }
+            return undecimalValue || "o";
+        }
+
+        function performOperation(operation) {
+            const num1 = undecimalToDecimal(document.getElementById("input1").value);
+            const num2 = undecimalToDecimal(document.getElementById("input2").value);
+            let result;
+            switch (operation) {
+                case '+':
+                    result = num1 + num2;
+                    break;
+                case '-':
+                    result = num1 - num2;
+                    break;
+                case '*':
+                    result = num1 * num2;
+                    break;
+                case '/':
+                    result = num1 / num2;
+                    break;
+            }
+            document.getElementById("undecimalResult").value = decimalToUndecimal(result);
+            if (document.getElementById("showDecimal").checked) {
+                document.getElementById("decimalResult").value = result;
+            } else {
+                document.getElementById("decimalResult").value = "";
+            }
+        }
+    </script>
+</body>
+</html>
