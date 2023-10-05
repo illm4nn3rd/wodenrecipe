@@ -44,10 +44,11 @@
 
     <script>
 const symbols = ["6", "L", "w", "d", "q", "o", "p", "b", "m", "7", "9"];
-const symbolToValue = {"6": -5, "L": -4, "w": -3, "d": -2, "q": -1, "o": 0, "p": 1, "b": 2, "m": 3, "7": 4, "9": 5};
-const positiveInverse = {"6": "9", "L": "7", "w": "m", "d": "b", "q": "p"};
+const symbolToValue = {"6": -5, "l": -4, "w": -3, "d": -2, "q": -1, "o": 0, "p": 1, "b": 2, "m": 3, "7": 4, "9": 5};
+const positiveInverse = {"6": "9", "l": "7", "w": "m", "d": "b", "q": "p"};
 
 function undecimalToDecimal(undecimalStr) {
+    undecimalStr = undecimalStr.toLowerCase(); // Convert to lowercase
     let decimal = 0;
     for(let i = 0; i < undecimalStr.length; i++) {
         let symbol = undecimalStr[i];
