@@ -17,16 +17,13 @@
             border-radius: 5px;
         }
         .buttons {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 5px;
             margin-top: 10px;
         }
         button {
             padding: 10px 20px;
-            margin: 5px;
-        }
-        .symbols {
-            display: grid;
-            grid-template-columns: repeat(5, 1fr);
-            gap: 10px;
         }
     </style>
 </head>
@@ -34,22 +31,21 @@
     <div class="calculator">
         <h2>Balanced Undecimal Calculator</h2>
         <input type="text" id="inputField" readonly>
-        <div class="symbols">
+        <div class="buttons">
+            <button onclick="appendToInput('w')">w</button>
             <button onclick="appendToInput('d')">d</button>
             <button onclick="appendToInput('q')">q</button>
             <button onclick="appendToInput('o')">o</button>
             <button onclick="appendToInput('p')">p</button>
             <button onclick="appendToInput('b')">b</button>
+            <button onclick="appendToInput('m')">m</button>
             <button onclick="appendToInput('6')">6</button>
             <button onclick="appendToInput('L')">L</button>
-            <button></button>
+            <button onclick="appendToInput('×')">×</button>
+            <button onclick="appendToInput('+')">+</button>
+            <button onclick="appendToInput('/')">/</button>
             <button onclick="appendToInput('7')">7</button>
             <button onclick="appendToInput('9')">9</button>
-        </div>
-        <div class="buttons">
-            <button onclick="appendToInput('+')">+</button>
-            <button onclick="appendToInput('×')">×</button>
-            <button onclick="appendToInput('/')">/</button>
             <button onclick="clearInput()">C</button>
             <button onclick="calculate()">=</button>
         </div>
