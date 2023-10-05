@@ -59,7 +59,7 @@
         <input type="text" id="outputField" readonly>
         <br>
         <footer>
-            Version: o.op
+            Version: o.ob
         </footer>
     </div>
 
@@ -102,7 +102,11 @@
                 decimalValue = Math.floor(decimalValue / 11);
                 unbalancedStr = remainder.toString() + unbalancedStr;
             }
-            return unbalancedStr || '0';
+            // Ensure that we have at least as many digits as the input
+            while (unbalancedStr.length < 2) {
+                unbalancedStr = '0' + unbalancedStr;
+            }
+            return unbalancedStr;
         }
 
         // Convert from unbalanced base 11 to balanced undecimal
@@ -118,7 +122,7 @@
             return undecimalStr;
         }
 
-        // Perform the arithmetic operation and display the result
+        // Perform the arithmetic operations and display the result
         function calculate() {
             const inputField = document.getElementById('inputField');
             const inputStr = inputField.value;
