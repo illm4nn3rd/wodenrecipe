@@ -9,7 +9,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/big.js/6.1.1/big.min.js"></script>
 
     <style>
-        /* ... [same styles as before] ... */
         body, button, input, footer {
             font-family: 'Kurale', serif;
             background-color: #fff;
@@ -41,8 +40,6 @@
             border: 2px solid #000;
         }
 
-        /* ... [same button styles as before] ... */
-
         input {
             width: 200px;
             padding: 10px;
@@ -52,9 +49,17 @@
             color: #000;
         }
 
-        footer {
-            margin-top: 20px;
-            font-size: 0.8em;
+        .row {
+            display: flex;
+            justify-content: center;
+        }
+
+        .row .button-container {
+            margin: 5px;
+        }
+
+        .row:nth-child(5) .button-container {
+            transform: translateY(-20px);
         }
     </style>
 </head>
@@ -63,45 +68,56 @@
     <div class="calculator">
         <h2>Balanced Undecimal Scientific Calculator</h2>
         <input type="text" id="inputField" placeholder="Enter calculation">
-        //<br>
         <br>
-        <button data-undecimal="6" onclick="appendToInput('6')">6</button>
-        <button data-undecimal="L" onclick="appendToInput('L')">L</button>
-        <button data-undecimal="7" onclick="appendToInput('7')">7</button>
-        <button data-undecimal="9" onclick="appendToInput('9')">9</button>
-        <br>
-        <button data-undecimal="d" onclick="appendToInput('d')">d</button>
-        <button data-undecimal="q" onclick="appendToInput('q')">q</button>
-        <button data-undecimal="p" onclick="appendToInput('p')">p</button>
-        <button data-undecimal="b" onclick="appendToInput('b')">b</button>
-        <br>
-        <button data-undecimal="w" onclick="appendToInput('w')">w</button>
-        <button data-undecimal="o" onclick="appendToInput('o')">o</button>
-        <button onclick="clearInput()">C</button>
-        <button data-undecimal="m" onclick="appendToInput('m')">m</button>
-        <br>
-        <button onclick="appendToInput('×')">×</button>
-        <button onclick="appendToInput('+')">+</button>
-        <button onclick="appendToInput('/')">/</button>
-        <button onclick="calculate()">=</button>
-        <br>
-        //<!-- ... [same buttons as before] ... -->
-        <button onclick="appendToInput('cos(')">cos</button>
-        <button onclick="appendToInput('sin(')">sin</button>
-        <button onclick="appendToInput('tan(')">tan</button>
-        <button onclick="appendToInput('log(')">log</button>
-        <br>
-        <button onclick="appendToInput('^')">^</button>
-        <button onclick="appendToInput('sqrt(')">√</button>
-        <button onclick="appendToInput('pi')">π</button>
-        <button onclick="appendToInput('e')">e</button>
-        <br>
+
+        <div class="row">
+            <div class="button-container"><button data-undecimal="6" onclick="appendToInput('6')">6</button></div>
+        </div>
+        <div class="row">
+            <div class="button-container"><button data-undecimal="L" onclick="appendToInput('L')">L</button></div>
+            <div class="button-container"><button data-undecimal="7" onclick="appendToInput('7')">7</button></div>
+        </div>
+        <div class="row">
+            <div class="button-container"><button data-undecimal="d" onclick="appendToInput('d')">d</button></div>
+            <div class="button-container"><button data-undecimal="o" onclick="appendToInput('o')">o</button></div>
+            <div class="button-container"><button data-undecimal="p" onclick="appendToInput('p')">p</button></div>
+        </div>
+        <div class="row">
+            <div class="button-container"><button data-undecimal="w" onclick="appendToInput('w')">w</button></div>
+            <div class="button-container"><button data-undecimal="q" onclick="appendToInput('q')">q</button></div>
+            <div class="button-container"><button data-undecimal="b" onclick="appendToInput('b')">b</button></div>
+            <div class="button-container"><button data-undecimal="m" onclick="appendToInput('m')">m</button></div>
+        </div>
+        <div class="row">
+            <div class="button-container"><button onclick="appendToInput('×')">×</button></div>
+            <div class="button-container"><button onclick="appendToInput('+')">+</button></div>
+            <div class="button-container"><button onclick="appendToInput('/')">/</button></div>
+            <div class="button-container"><button onclick="calculate()">=</button></div>
+        </div>
+        <div class="row">
+            <div class="button-container"><button onclick="appendToInput('cos(')">cos</button></div>
+            <div class="button-container"><button onclick="appendToInput('sin(')">sin</button></div>
+            <div class="button-container"><button onclick="appendToInput('tan(')">tan</button></div>
+        </div>
+        <div class="row">
+            <div class="button-container"><button onclick="appendToInput('log(')">log</button></div>
+            <div class="button-container"><button onclick="appendToInput('^')">^</button></div>
+        </div>
+        <div class="row">
+            <div class="button-container"><button onclick="appendToInput('sqrt(')">√</button></div>
+            <div class="button-container"><button onclick="appendToInput('pi')">π</button></div>
+        </div>
+        <div class="row">
+            <div class="button-container"><button onclick="appendToInput('e')">e</button></div>
+        </div>
+
         <input type="text" id="outputField" readonly>
         <br>
         <footer>
             Version: o.pm
         </footer>
     </div>
+
 
     <script>
         const undecimalSymbols = ['6', 'L', 'w', 'd', 'q', 'o', 'p', 'b', 'm', '7', '9'];
