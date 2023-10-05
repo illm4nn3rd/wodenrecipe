@@ -43,7 +43,7 @@
     </div>
 
     <script>
-        const symbols = ["6", "L", "w", "d", "q", "o", "p", "b", "m", "7", "9"];
+const symbols = ["6", "L", "w", "d", "q", "o", "p", "b", "m", "7", "9"];
 const symbolToValue = {
     "6": -5, "L": -4, "w": -3, "d": -2, "q": -1,
     "o": 0,
@@ -72,9 +72,16 @@ function decimalToUndecimal(decimalValue) {
 
 function undecimalToDecimal(undecimalValue) {
     let decimalValue = 0;
+    let isNegative = undecimalValue[0] in {"6": true, "L": true, "w": true, "d": true, "q": true};
+    
     for (let i = 0; i < undecimalValue.length; i++) {
         decimalValue = decimalValue * 11 + symbolToValue[undecimalValue[i]];
     }
+    
+    if (isNegative) {
+        decimalValue = -Math.abs(decimalValue);
+    }
+    
     return decimalValue;
 }
 
@@ -125,6 +132,7 @@ function performOperation(operation) {
         document.getElementById("decimalResult").value = "";
     }
 }
+
 
     </script>
 </body>
