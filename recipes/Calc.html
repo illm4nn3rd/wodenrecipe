@@ -16,6 +16,9 @@
             border: 1px solid #ccc;
             border-radius: 5px;
         }
+        .buttons {
+            margin-top: 10px;
+        }
         button {
             padding: 10px 20px;
             margin: 5px;
@@ -25,103 +28,91 @@
 <body>
     <div class="calculator">
         <h2>Balanced Undecimal Calculator</h2>
-        <input type="text" id="input1" placeholder="Enter first undecimal number">
-        <input type="text" id="input2" placeholder="Enter second undecimal number">
-        <br>
-        <button onclick="performOperation('+')">+</button>
-        <button onclick="performOperation('-')">-</button>
-        <button onclick="performOperation('*')">*</button>
-        <button onclick="performOperation('/')">/</button>
-        <br>
-        <label for="undecimalResult">Result (Undecimal):</label>
-        <input type="text" id="undecimalResult" readonly>
-        <br>
-        <input type="checkbox" id="showDecimal"> Show result in decimal
-        <br>
-        <label for="decimalResult">Result (Decimal):</label>
-        <input type="text" id="decimalResult" readonly>
+        <input type="text" id="inputField" readonly>
+        <div class="buttons">
+            <button onclick="appendToInput('o')">o</button>
+            <button onclick="appendToInput('p')">p</button>
+            <button onclick="appendToInput('b')">b</button>
+            <button onclick="appendToInput('m')">m</button>
+            <button onclick="appendToInput('7')">7</button>
+            <button onclick="appendToInput('9')">9</button>
+        </div>
+        <div class="buttons">
+            <button onclick="appendToInput('+')">+</button>
+            <button onclick="appendToInput('×')">×</button>
+            <button onclick="appendToInput('/')">/</button>
+            <button onclick="clearInput()">C</button>
+            <button onclick="calculate()">=</button>
+        </div>
+        <div>
+            <label for="outputField">Result:</label>
+            <input type="text" id="outputField" readonly>
+        </div>
     </div>
 
     <script>
-const symbols = ["6", "L", "w", "d", "q", "o", "p", "b", "m", "7", "9"];
-const symbolToValue = {"6": -5, "l": -4, "w": -3, "d": -2, "q": -1, "o": 0, "p": 1, "b": 2, "m": 3, "7": 4, "9": 5};
-const positiveInverse = {"6": "9", "l": "7", "w": "m", "d": "b", "q": "p"};
+        const undecimalSymbols = ['o', 'p', 'b', 'm', '7', '9'];
+        const undecimalValues = [0, 1, 2, 3, 4, 5];
 
-function undecimalToDecimal(undecimalStr) {
-    undecimalStr = undecimalStr.toLowerCase(); // Convert to lowercase
-    let decimal = 0;
-    for(let i = 0; i < undecimalStr.length; i++) {
-        let symbol = undecimalStr[i];
-        decimal = decimal * 11 + symbolToValue[symbol];
-    }
-    return decimal;
-}
-
-function decimalToUndecimal(decimalValue) {
-    let undecimalValue = "";
-    while (decimalValue !== 0) {
-        let remainder = decimalValue % 11;
-        let quotient = Math.floor(decimalValue / 11);
-        if (remainder > 5) {
-            remainder -= 11;
-            quotient += 1;
-        } else if (remainder < -5) {
-            remainder += 11;
-            quotient -= 1;
+        function appendToInput(symbol) {
+            const inputField = document.getElementById("inputField");
+            inputField.value += symbol;
         }
-        undecimalValue = symbols[5 + remainder] + undecimalValue;
-        decimalValue = quotient;
-    }
-    return undecimalValue || "o";
-}
 
-function adjustForNegatives(undecimal1, undecimal2, operation) {
-    undecimal1 = undecimal1.toLowerCase();
-    undecimal2 = undecimal2.toLowerCase();
-    let adjustedUndecimal1 = "";
-    let adjustedUndecimal2 = "";
-
-    for (let char of undecimal1) {
-        if (symbolToValue[char] < 0) {
-            adjustedUndecimal1 += positiveInverse[char];
-            if (operation === '+') operation = '-';
-            else if (operation === '-') operation = '+';
-        } else {
-            adjustedUndecimal1 += char;
+        function clearInput() {
+            document.getElementById("inputField").value = "";
+            document.getElementById("outputField").value = "";
         }
-    }
 
-    for (let char of undecimal2) {
-        if (symbolToValue[char] < 0) {
-            adjustedUndecimal2 += positiveInverse[char];
-            if (operation === '+') operation = '-';
-            else if (operation === '-') operation = '+';
-        } else {
-            adjustedUndecimal2 += char;
+        function calculate() {
+            const input = document.getElementById("inputField").value;
+            let result;
+
+            if (input.includes('+')) {
+                const [a, b] = input.split('+');
+                result = addUndecimal(a, b);
+            } else if (input.includes('×')) {
+                const [a, b] = input.split('×');
+                result = multiplyUndecimal(a, b);
+            } else if (input.includes('/')) {
+                const [a, b] = input.split('/');
+                result = undecimalToFraction(a + '/' + b);
+            }
+
+            document.getElementById("outputField").value = result;
         }
-    }
 
-    return [adjustedUndecimal1, adjustedUndecimal2, operation];
-}
+        function undecimalToDecimal(undecimalStr) {
+            let decimalValue = 0;
+            for (let i = 0; i < undecimalStr.length; i++) {
+                decimalValue = decimalValue * 6 + undecimalValues[undecimalSymbols.indexOf(undecimalStr[i])];
+            }
+            return decimalValue;
+        }
 
-function performOperation(operation) {
-    let input1 = document.getElementById("input1").value;
-    let input2 = document.getElementById("input2").value;
-    let result;
+        function decimalToUndecimal(decimalValue) {
+            let undecimalStr = '';
+            while (decimalValue > 0) {
+                undecimalStr = undecimalSymbols[decimalValue % 6] + undecimalStr;
+                decimalValue = Math.floor(decimalValue / 6);
+            }
+            return undecimalStr || 'o';
+        }
 
-    [input1, input2, operation] = adjustForNegatives(input1, input2, operation);
+        function addUndecimal(a, b) {
+            const decimalResult = undecimalToDecimal(a) + undecimalToDecimal(b);
+            return decimalToUndecimal(decimalResult);
+        }
 
-    switch(operation) {
-        case '+': result = decimalToUndecimal(undecimalToDecimal(input1) + undecimalToDecimal(input2)); break;
-        case '-': result = decimalToUndecimal(undecimalToDecimal(input1) - undecimalToDecimal(input2)); break;
-        case '*': result = decimalToUndecimal(undecimalToDecimal(input1) * undecimalToDecimal(input2)); break;
-        case '/': result = divideAsFraction(input1, input2); break;
-    }
+        function multiplyUndecimal(a, b) {
+            const decimalResult = undecimalToDecimal(a) * undecimalToDecimal(b);
+            return decimalToUndecimal(decimalResult);
+        }
 
-    document.getElementById("undecimalResult").value = result;
-}
-
-
+        function undecimalToFraction(undecimalFraction) {
+            const [numerator, denominator] = undecimalFraction.split('/');
+            return `${decimalToUndecimal(undecimalToDecimal(numerator))}/${decimalToUndecimal(undecimalToDecimal(denominator))}`;
+        }
     </script>
 </body>
 </html>
