@@ -45,10 +45,16 @@
     <script>
 const symbols = ["6", "L", "w", "d", "q", "o", "p", "b", "m", "7", "9"];
 const symbolToValue = {
-    "6": -5, "L": -4, "w": -3, "d": -2, "q": -1,
-    "o": 0,
-    "p": 1, "b": 2, "m": 3, "7": 4, "9": 5
+    "6": -5, "L": -4, "w": -3, "d": -2, "q": -1, "o": 0, "p": 1, "b": 2, "m": 3, "7": 4, "9": 5
 };
+
+function undecimalToDecimal(undecimal) {
+    let decimal = 0;
+    for (let i = 0; i < undecimal.length; i++) {
+        decimal = decimal * 11 + symbolToValue[undecimal[i]];
+    }
+    return decimal;
+}
 
 function decimalToUndecimal(decimalValue) {
     let undecimalValue = "";
@@ -70,69 +76,33 @@ function decimalToUndecimal(decimalValue) {
     return undecimalValue || "o";
 }
 
-function undecimalToDecimal(undecimalValue) {
-    let decimalValue = 0;
-    let isNegative = undecimalValue[0] in {"6": true, "L": true, "w": true, "d": true, "q": true};
-    
-    for (let i = 0; i < undecimalValue.length; i++) {
-        decimalValue = decimalValue * 11 + symbolToValue[undecimalValue[i]];
-    }
-    
-    if (isNegative) {
-        decimalValue = -Math.abs(decimalValue);
-    }
-    
-    return decimalValue;
-}
-
-function addUndecimal(undecimal1, undecimal2) {
-    const decimalResult = undecimalToDecimal(undecimal1) + undecimalToDecimal(undecimal2);
-    return decimalToUndecimal(decimalResult);
-}
-
-function subtractUndecimal(undecimal1, undecimal2) {
-    const decimalResult = undecimalToDecimal(undecimal1) - undecimalToDecimal(undecimal2);
-    return decimalToUndecimal(decimalResult);
-}
-
-function multiplyUndecimal(undecimal1, undecimal2) {
-    const decimalResult = undecimalToDecimal(undecimal1) * undecimalToDecimal(undecimal2);
-    return decimalToUndecimal(decimalResult);
-}
-
-function divideUndecimal(undecimal1, undecimal2) {
-    const decimalResult = Math.floor(undecimalToDecimal(undecimal1) / undecimalToDecimal(undecimal2));
-    return decimalToUndecimal(decimalResult);
-}
-
 function performOperation(operation) {
-    const undecimal1 = document.getElementById("input1").value;
-    const undecimal2 = document.getElementById("input2").value;
+    const input1 = undecimalToDecimal(document.getElementById("input1").value);
+    const input2 = undecimalToDecimal(document.getElementById("input2").value);
     let result;
     
     switch (operation) {
         case '+':
-            result = addUndecimal(undecimal1, undecimal2);
+            result = input1 + input2;
             break;
         case '-':
-            result = subtractUndecimal(undecimal1, undecimal2);
+            result = input1 - input2;
             break;
         case '*':
-            result = multiplyUndecimal(undecimal1, undecimal2);
+            result = input1 * input2;
             break;
         case '/':
-            result = divideUndecimal(undecimal1, undecimal2);
+            result = input1 / input2;
             break;
     }
-
-    document.getElementById("undecimalResult").value = result;
+    
+    document.getElementById("undecimalResult").value = decimalToUndecimal(result);
     if (document.getElementById("showDecimal").checked) {
-        document.getElementById("decimalResult").value = undecimalToDecimal(result);
+        document.getElementById("decimalResult").value = result;
     } else {
         document.getElementById("decimalResult").value = "";
     }
 }
-
 
     </script>
 </body>
