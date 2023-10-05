@@ -65,30 +65,25 @@
     </style>
 </head>
 
-
-
-
-
-
 <body>
     <div class="calculator">
         <h2>Balanced Undecimal Calculator</h2>
         <input type="text" id="inputField" placeholder="Enter calculation">
         <br>
-        <button data-undecimal onclick="appendToInput('6')">6</button>
-        <button data-undecimal onclick="appendToInput('L')">L</button>
-        <button data-undecimal onclick="appendToInput('7')">7</button>
-        <button data-undecimal onclick="appendToInput('9')">9</button>
+        <button data-undecimal="6" onclick="appendToInput('6')">6</button>
+        <button data-undecimal="L" onclick="appendToInput('L')">L</button>
+        <button data-undecimal="7" onclick="appendToInput('7')">7</button>
+        <button data-undecimal="9" onclick="appendToInput('9')">9</button>
         <br>
-        <button data-undecimal onclick="appendToInput('d')">d</button>
-        <button data-undecimal onclick="appendToInput('q')">q</button>
-        <button data-undecimal onclick="appendToInput('p')">p</button>
-        <button data-undecimal onclick="appendToInput('b')">b</button>
+        <button data-undecimal="d" onclick="appendToInput('d')">d</button>
+        <button data-undecimal="q" onclick="appendToInput('q')">q</button>
+        <button data-undecimal="p" onclick="appendToInput('p')">p</button>
+        <button data-undecimal="b" onclick="appendToInput('b')">b</button>
         <br>
-        <button data-undecimal onclick="appendToInput('w')">w</button>
-        <button data-undecimal onclick="appendToInput('o')">o</button>
+        <button data-undecimal="w" onclick="appendToInput('w')">w</button>
+        <button data-undecimal="o" onclick="appendToInput('o')">o</button>
         <button onclick="clearInput()">C</button>
-        <button data-undecimal onclick="appendToInput('m')">m</button>
+        <button data-undecimal="m" onclick="appendToInput('m')">m</button>
         <br>
         <button onclick="appendToInput('×')">×</button>
         <button onclick="appendToInput('+')">+</button>
@@ -98,9 +93,12 @@
         <input type="text" id="outputField" readonly>
         <br>
         <footer>
-            Version: o.pq
+            Version: o.p
         </footer>
     </div>
+
+
+
 
 
     <script>
