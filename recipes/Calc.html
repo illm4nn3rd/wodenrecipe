@@ -37,8 +37,9 @@
         }
 
         button[data-undecimal] {
-            font-family: 'Computer Modern Serif', serif; /* Fancy math font */
-        }
+    font-family: 'Noto Sans Armenian', sans-serif;
+}
+
 
         input {
             width: 200px;
@@ -84,7 +85,7 @@
         <input type="text" id="outputField" readonly>
         <br>
         <footer>
-            Version: o.o9
+            Version: o.p6
         </footer>
     </div>
 
@@ -202,18 +203,96 @@
 
 
 
-        // Append a symbol to the input field
-        function appendToInput(symbol) {
-            const inputField = document.getElementById('inputField');
-            inputField.value += symbol;
+        <script>
+    // Define the symbols and their corresponding values
+    const undecimalSymbols = ['6', 'L', 'w', 'd', 'q', 'o', 'p', 'b', 'm', '7', '9'];
+    const undecimalValues = {
+        '6': -5, 'L': -4, 'w': -3, 'd': -2, 'q': -1,
+        'o': 0,
+        'p': 1, 'b': 2, 'm': 3, '7': 4, '9': 5
+    };
+
+    function balancedToDecimal(undecimalStr) {
+        let decimalValue = 0;
+        let base = 1;
+        for (let i = undecimalStr.length - 1; i >= 0; i--) {
+            decimalValue += undecimalValues[undecimalStr[i]] * base;
+            base *= 11;
+        }
+        return decimalValue;
+    }
+
+    function decimalToBalanced(decimalValue) {
+        if (decimalValue === 0) return 'o';
+        let undecimalStr = '';
+        while (decimalValue !== 0) {
+            let remainder = decimalValue % 11;
+            decimalValue = Math.floor(decimalValue / 11);
+            if (remainder > 5) {
+                remainder -= 11;
+                decimalValue += 1;
+            } else if (remainder < -5) {
+                remainder += 11;
+                decimalValue -= 1;
+            }
+            undecimalStr = undecimalSymbols[remainder + 5] + undecimalStr;
+        }
+        return undecimalStr;
+    }
+
+    // Perform the arithmetic operations and display the result
+    function calculate() {
+        const inputField = document.getElementById('inputField');
+        const inputStr = inputField.value;
+
+        let operands, operation;
+        if (inputStr.includes('+')) {
+            operands = inputStr.split('+');
+            operation = '+';
+        } else if (inputStr.includes('×')) {
+            operands = inputStr.split('×');
+            operation = '×';
+        } else if (inputStr.includes('/')) {
+            operands = inputStr.split('/');
+            operation = '/';
+        } else {
+            return;
         }
 
-        // Clear the input and output fields
-        function clearInput() {
-            const inputField = document.getElementById('inputField');
-            inputField.value = '';
-            document.getElementById('outputField').value = '';
+        const operand1Decimal = balancedToDecimal(operands[0]);
+        const operand2Decimal = balancedToDecimal(operands[1]);
+
+        let resultDecimal;
+        switch (operation) {
+            case '+':
+                resultDecimal = operand1Decimal + operand2Decimal;
+                break;
+            case '×':
+                resultDecimal = operand1Decimal * operand2Decimal;
+                break;
+            case '/':
+                resultDecimal = operand1Decimal / operand2Decimal;
+                break;
         }
-    </script>
+
+        const resultUndecimal = decimalToBalanced(resultDecimal);
+
+        document.getElementById('outputField').value = resultUndecimal;
+    }
+
+    // Append a symbol to the input field
+    function appendToInput(symbol) {
+        const inputField = document.getElementById('inputField');
+        inputField.value += symbol;
+    }
+
+    // Clear the input and output fields
+    function clearInput() {
+        const inputField = document.getElementById('inputField');
+        inputField.value = '';
+        document.getElementById('outputField').value = '';
+    }
+</script>
+
 </body>
 </html>
