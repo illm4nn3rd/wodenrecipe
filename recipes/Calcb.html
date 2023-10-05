@@ -63,8 +63,29 @@
     <div class="calculator">
         <h2>Balanced Undecimal Scientific Calculator</h2>
         <input type="text" id="inputField" placeholder="Enter calculation">
+        //<br>
         <br>
-        <!-- ... [same buttons as before] ... -->
+        <button data-undecimal="6" onclick="appendToInput('6')">6</button>
+        <button data-undecimal="L" onclick="appendToInput('L')">L</button>
+        <button data-undecimal="7" onclick="appendToInput('7')">7</button>
+        <button data-undecimal="9" onclick="appendToInput('9')">9</button>
+        <br>
+        <button data-undecimal="d" onclick="appendToInput('d')">d</button>
+        <button data-undecimal="q" onclick="appendToInput('q')">q</button>
+        <button data-undecimal="p" onclick="appendToInput('p')">p</button>
+        <button data-undecimal="b" onclick="appendToInput('b')">b</button>
+        <br>
+        <button data-undecimal="w" onclick="appendToInput('w')">w</button>
+        <button data-undecimal="o" onclick="appendToInput('o')">o</button>
+        <button onclick="clearInput()">C</button>
+        <button data-undecimal="m" onclick="appendToInput('m')">m</button>
+        <br>
+        <button onclick="appendToInput('×')">×</button>
+        <button onclick="appendToInput('+')">+</button>
+        <button onclick="appendToInput('/')">/</button>
+        <button onclick="calculate()">=</button>
+        <br>
+        //<!-- ... [same buttons as before] ... -->
         <button onclick="appendToInput('cos(')">cos</button>
         <button onclick="appendToInput('sin(')">sin</button>
         <button onclick="appendToInput('tan(')">tan</button>
@@ -78,7 +99,7 @@
         <input type="text" id="outputField" readonly>
         <br>
         <footer>
-            Version: o.pp
+            Version: o.pm
         </footer>
     </div>
 
@@ -132,7 +153,45 @@
             inputStr = inputStr.replace(/e/g, Math.E);
 
             // ... [same logic as before for basic operations] ...
+// Perform the arithmetic operations and display the result
+        function calculate() {
+            const inputField = document.getElementById('inputField');
+            const inputStr = inputField.value;
 
+            let operands, operation;
+            if (inputStr.includes('+')) {
+                operands = inputStr.split('+');
+                operation = '+';
+            } else if (inputStr.includes('×')) {
+                operands = inputStr.split('×');
+                operation = '×';
+            } else if (inputStr.includes('/')) {
+                operands = inputStr.split('/');
+                operation = '/';
+            } else {
+                return;
+            }
+
+            const operand1Decimal = balancedToDecimal(operands[0]);
+            const operand2Decimal = balancedToDecimal(operands[1]);
+
+            let resultDecimal;
+            switch (operation) {
+                case '+':
+                    resultDecimal = operand1Decimal + operand2Decimal;
+                    break;
+                case '×':
+                    resultDecimal = operand1Decimal * operand2Decimal;
+                    break;
+                case '/':
+                    resultDecimal = operand1Decimal / operand2Decimal;
+                    break;
+            }
+
+            const resultUndecimal = decimalToBalanced(resultDecimal);
+
+            document.getElementById('outputField').value = resultUndecimal;
+                    }
             const resultUndecimal = decimalToBalanced(resultDecimal);
 
             document.getElementById('outputField').value = resultUndecimal;
