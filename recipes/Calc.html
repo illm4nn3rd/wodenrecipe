@@ -8,61 +8,68 @@
     <link href="https://fonts.googleapis.com/css2?family=Kurale&display=swap" rel="stylesheet">
 
     <style>
-        body {
+        body, button, input, footer {
             font-family: 'Kurale', serif;
+            background-color: #fff;
+            color: #000;
             text-align: center;
-            margin-top: 50px;
-            background-color: #ffffff;
-            color: #000000;
+            margin: 0;
+            padding: 0;
+            border: none;
+            box-sizing: border-box;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
         }
 
         .calculator {
-            display: inline-block;
             padding: 20px;
-            border: 1px solid #000000;
-            background-color: #ffffff;
+            border: 1px solid #000;
         }
 
         button {
             padding: 10px 20px;
             margin: 5px;
-            border: 1px solid #000000;
-            background-color: #ffffff;
-            color: #000000;
+            background-color: #000; /* Default to black */
+            color: #fff;
             cursor: pointer;
             transition: background-color 0.3s;
         }
 
-        button[data-undecimal] {
-            background-color: function(value) {
-                const undecimalValues = {
-                    '6': -5, 'L': -4, 'w': -3, 'd': -2, 'q': -1,
-                    'o': 0,
-                    'p': 1, 'b': 2, 'm': 3, '7': 4, '9': 5
-                };
-                const grayValue = 255 - (undecimalValues[value] + 5) * 20;
-                return `rgb(${grayValue}, ${grayValue}, ${grayValue})`;
-            };
-        }
+        /* Adjust button colors based on their associated values */
+        button[data-undecimal="6"] { background-color: #000; } /* -5 */
+        button[data-undecimal="L"] { background-color: #333; } /* -4 */
+        button[data-undecimal="w"] { background-color: #666; } /* -3 */
+        button[data-undecimal="d"] { background-color: #999; } /* -2 */
+        button[data-undecimal="q"] { background-color: #ccc; } /* -1 */
+        button[data-undecimal="o"] { background-color: #fff; color: #000; } /* 0 */
+        button[data-undecimal="p"] { background-color: #ccc; } /* 1 */
+        button[data-undecimal="b"] { background-color: #999; } /* 2 */
+        button[data-undecimal="m"] { background-color: #666; } /* 3 */
+        button[data-undecimal="7"] { background-color: #333; } /* 4 */
+        button[data-undecimal="9"] { background-color: #000; } /* 5 */
 
         input {
             width: 200px;
             padding: 10px;
             margin: 5px 0;
-            border: 1px solid #000000;
-            background-color: #ffffff;
-            color: #000000;
+            border: 1px solid #000;
+            background-color: #fff;
+            color: #000;
         }
 
         footer {
             margin-top: 20px;
             font-size: 0.8em;
-            color: #888888;
         }
     </style>
-
-
 </head>
+
+
 
 <body>
     <div class="calculator">
