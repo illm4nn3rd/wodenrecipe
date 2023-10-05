@@ -97,14 +97,22 @@
         }
 
         function decimalToUndecimal(decimalValue) {
-            let undecimalStr = '';
-            while (decimalValue !== 0) {
-                const remainder = decimalValue % 11;
-                decimalValue = (decimalValue - remainder) / 11;
-                undecimalStr = undecimalSymbols[remainder + 5] + undecimalStr;
-            }
-            return undecimalStr || 'o';
+    let undecimalStr = '';
+    while (decimalValue !== 0) {
+        let remainder = decimalValue % 11;
+        decimalValue = Math.floor(decimalValue / 11);
+
+        // Adjust for negative remainders
+        if (remainder < 0) {
+            remainder += 11;
+            decimalValue -= 1;
         }
+
+        undecimalStr = undecimalSymbols[remainder] + undecimalStr;
+    }
+    return undecimalStr || 'o';
+}
+
 
         function addUndecimal(a, b) {
             const decimalResult = undecimalToDecimal(a) + undecimalToDecimal(b);
