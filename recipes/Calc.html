@@ -5,31 +5,47 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Balanced Undecimal Calculator</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            margin-top: 50px;
-        }
-        .calculator {
-            display: inline-block;
-            padding: 20px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-        button {
-            padding: 10px 20px;
-            margin: 5px;
-        }
-        input {
-            width: 200px;
-        }
-        footer {
-    margin-top: 20px;
-    font-size: 0.8em;
-    color: #888;
-}
+    body {
+        font-family: 'Georgia', serif;
+        text-align: center;
+        margin-top: 50px;
+        background-color: #f4f4f4;
+    }
+    .calculator {
+        display: inline-block;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        background-color: #fff;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    button {
+        padding: 10px 20px;
+        margin: 5px;
+        border: none;
+        border-radius: 5px;
+        background-color: #007BFF;
+        color: #fff;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+    button:hover {
+        background-color: #0056b3;
+    }
+    input {
+        width: 200px;
+        padding: 10px;
+        margin: 5px 0;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+    footer {
+        margin-top: 20px;
+        font-size: 0.8em;
+        color: #888;
+    }
+</style>
 
-    </style>
 </head>
 <body>
     <div class="calculator">
@@ -59,7 +75,7 @@
         <input type="text" id="outputField" readonly>
         <br>
         <footer>
-            Version: o.om
+            Version: o.o7
         </footer>
     </div>
 
@@ -136,47 +152,45 @@
 
         // Perform the arithmetic operations and display the result
         function calculate() {
-            const inputField = document.getElementById('inputField');
-            const inputStr = inputField.value;
+    const inputField = document.getElementById('inputField');
+    const inputStr = inputField.value;
 
-            let operands, operation;
-            if (inputStr.includes('+')) {
-                operands = inputStr.split('+');
-                operation = '+';
-            } else if (inputStr.includes('×')) {
-                operands = inputStr.split('×');
-                operation = '×';
-            } else if (inputStr.includes('/')) {
-                operands = inputStr.split('/');
-                operation = '/';
-            } else {
-                return;
-            }
+    let operands, operation;
+    if (inputStr.includes('+')) {
+        operands = inputStr.split('+');
+        operation = '+';
+    } else if (inputStr.includes('×')) {
+        operands = inputStr.split('×');
+        operation = '×';
+    } else if (inputStr.includes('/')) {
+        operands = inputStr.split('/');
+        operation = '/';
+    } else {
+        return;
+    }
 
-            const operand1Unbalanced = balancedToUnbalanced(operands[0]);
-            const operand2Unbalanced = balancedToUnbalanced(operands[1]);
+    const operand1Decimal = unbalancedToDecimal(balancedToUnbalanced(operands[0]));
+    const operand2Decimal = unbalancedToDecimal(balancedToUnbalanced(operands[1]));
 
-            const operand1Decimal = unbalancedToDecimal(operand1Unbalanced);
-            const operand2Decimal = unbalancedToDecimal(operand2Unbalanced);
+    let resultDecimal;
+    switch (operation) {
+        case '+':
+            resultDecimal = operand1Decimal + operand2Decimal;
+            break;
+        case '×':
+            resultDecimal = operand1Decimal * operand2Decimal;
+            break;
+        case '/':
+            resultDecimal = operand1Decimal / operand2Decimal;
+            break;
+    }
 
-            let resultDecimal;
-            switch (operation) {
-                case '+':
-                    resultDecimal = operand1Decimal + operand2Decimal;
-                    break;
-                case '×':
-                    resultDecimal = operand1Decimal * operand2Decimal;
-                    break;
-                case '/':
-                    resultDecimal = operand1Decimal / operand2Decimal;
-                    break;
-            }
+    const resultUndecimal = unbalancedToBalanced(decimalToUnbalanced(resultDecimal));
 
-            const resultUnbalanced = decimalToUnbalanced(resultDecimal);
-            const resultUndecimal = unbalancedToBalanced(resultUnbalanced);
+    document.getElementById('outputField').value = resultUndecimal;
+}
 
-            document.getElementById('outputField').value = resultUndecimal;
-        }
+
 
         // Append a symbol to the input field
         function appendToInput(symbol) {
