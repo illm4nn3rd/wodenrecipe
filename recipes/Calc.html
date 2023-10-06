@@ -40,7 +40,7 @@
         }
 
         /* Adjust button colors based on their associated values */
-        button[data-undecimal="o"] { background-color: #fff; color: #000; border: 2px solid #808080; } /* 0 */
+        button[data-undecimal="o"] { background-color: #fff; color: #000; border: 1px solid #808080; } /* 0 */
         button[data-undecimal="q"], button[data-undecimal="p"] { background-color: #E5E4E2; color: #000; } /* lightest gray */
         button[data-undecimal="d"], button[data-undecimal="b"] { background-color: #D3D3D3; } /* second lightest gray */
         button[data-undecimal="w"], button[data-undecimal="m"] { background-color: #C0C0C0; } /* middle gray */
@@ -75,19 +75,19 @@
         <input type="text" id="inputField" placeholder="Enter calculation">
         <button onclick="clearInput()">C</button>
         <br>
-        <button data-undecimal="6" onclick="appendToInput('6')">6</button>
-        <button data-undecimal="L" onclick="appendToInput('L')">L</button>
-        <button data-undecimal="7" onclick="appendToInput('7')">7</button>
-        <button data-undecimal="9" onclick="appendToInput('9')">9</button>
-        <br>
-        <button data-undecimal="w" onclick="appendToInput('w')">d</button>
-        <button data-undecimal="d" onclick="appendToInput('d')">q</button>
-        <button data-undecimal="b" onclick="appendToInput('b')">p</button>
-        <button data-undecimal="m" onclick="appendToInput('m')">b</button>
-        <br>
-        <button data-undecimal="q" onclick="appendToInput('q')">w</button>
+        <button data-undecimal="6" onclick="appendToInput('6')">w</button>
         <button data-undecimal="o" onclick="appendToInput('o')">o</button>
-        <button data-undecimal="m" onclick="appendToInput('m')">m</button>
+        <button data-undecimal="9" onclick="appendToInput('9')">m</button>
+        <br>
+        <button data-undecimal="L" onclick="appendToInput('L')">6</button>
+        <button data-undecimal="w" onclick="appendToInput('w')">L</button>
+        <button data-undecimal="m" onclick="appendToInput('m')">7</button>
+        <button data-undecimal="7" onclick="appendToInput('7')">9</button>
+        <br>
+        <button data-undecimal="d" onclick="appendToInput('d')">d</button>
+        <button data-undecimal="q" onclick="appendToInput('q')">q</button>
+        <button data-undecimal="p" onclick="appendToInput('p')">p</button>
+        <button data-undecimal="b" onclick="appendToInput('b')">b</button>
         <br>
         <button onclick="appendToInput('×')">×</button>
         <button onclick="appendToInput('+')">+</button>
