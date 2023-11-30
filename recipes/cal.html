@@ -8,8 +8,8 @@
     <style>
         body, button, input, footer {
             font-family: 'Kurale', serif;
-            background-color: #f4e9d8; /* Light sand color */
-            color: #5a4634; /* Dark brown text */
+            background-color: #edc9af; /* Light sand color */
+            color: #db4437; /* Dark brown text */
             text-align: center;
             margin: 0;
             padding: 0;
@@ -26,7 +26,7 @@
 
         .calculator {
             padding: 20px;
-            border: 2px solid #8c7b6d; /* Earthy brown border */
+            border: 2px solid #eda96e; /* Earthy brown border */
         }
 
         button {
@@ -48,9 +48,11 @@
         button[data-pentadecimal="5"], button[data-pentadecimal="2"] { background-color: #c0ad8f; }
         button[data-pentadecimal="6"], button[data-pentadecimal="9"] { background-color: #b8a383; }
         button[data-pentadecimal="7"], button[data-pentadecimal="L"] { background-color: #b09977; }
+        button[data-pentadecimal="7"], button[data-pentadecimal="L"] { background-color: #b09977; }
 
         /* Function keys */
-        button[onclick="appendToInput('+')"], button[onclick="appendToInput('×')"], button[onclick="appendToInput('/')"], button[onclick="calculate()"], button[onclick="clearInput()"] { background-color: #a88f6b; }
+        button[onclick="appendToInput('+')"], button[onclick="appendToInput('×')"], button[onclick="appendToInput('/')"], 
+        button[onclick="calculate()"], button[onclick="clearInput()"] { background-color: #b22222; }
 
         input {
             width: 200px;
