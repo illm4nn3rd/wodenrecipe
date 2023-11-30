@@ -45,9 +45,10 @@
         button[data-pentadecimal="b"], button[data-pentadecimal="d"] { background-color: #d2b48c; }
         button[data-pentadecimal="n"], button[data-pentadecimal="u"] { background-color: #b08e75; }
         button[data-pentadecimal="m"], button[data-pentadecimal="w"] { background-color: #a07c60; }
-        button[data-pentadecimal="5"], button[data-pentadecimal="2"] { background-color: #8f6a4d; }
-        button[data-pentadecimal="6"], button[data-pentadecimal="9"] { background-color: #7e583a; }
-        button[data-pentadecimal="7"], button[data-pentadecimal="L"] { background-color: #6d4627; }
+        button[data-pentadecimal="5"], button[data-pentadecimal="2"] { background-color: #8f6a4d; color: #edc9af }
+        button[data-pentadecimal="6"], button[data-pentadecimal="9"] { background-color: #7e583a;color: #8B0000; }
+        button[data-pentadecimal="7"], button[data-pentadecimal="L"] { background-color: #6d4627;color: #8B0000; /* Dark brown text */
+             } 
         
         /* Function keys */
         button[onclick="appendToInput('+')"], button[onclick="appendToInput('×')"], button[onclick="appendToInput('/')"], 
@@ -81,11 +82,11 @@
         <button onclick="clearInput()">C</button>
         <br>
         <button data-pentadecimal="L" onclick="appendToInput('L')">L</button>
-        <button data-pentadecimal="7" onclick="appendToInput('7')">7</button>
-      
+        
         <button data-pentadecimal="9" onclick="appendToInput('9')">9</button>
         <button data-pentadecimal="6" onclick="appendToInput('6')">6</button>
-
+<button data-pentadecimal="7" onclick="appendToInput('7')">7</button>
+      
 
         
          
