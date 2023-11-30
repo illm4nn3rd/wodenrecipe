@@ -79,10 +79,9 @@
         <input type="text" id="inputField" placeholder="Enter calculation">
         <button onclick="clearInput()">C</button>
         <br>
-        <button></button>
-        <button></button>
         <button onclick="appendToInput('/')">/</button>
         <br>
+        <button data-tridecimal="L" onclick="appendToInput('L')">L</button>
         <button data-tridecimal="9" onclick="appendToInput('9')">9</button>
         <button data-tridecimal="2" onclick="appendToInput('2')">2</button>
         <button data-tridecimal="w" onclick="appendToInput('w')">w</button>
@@ -103,8 +102,6 @@
         <br>
         <button onclick="appendToInput('+')">+</button>
         <button onclick="appendToInput('×')">×</button>
-        <button></button>
-        <button></button>
         <br>
         <button onclick="calculate()">=</button>
         <input type="text" id="outputField" readonly>
