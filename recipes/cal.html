@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Balanced Tridecimal Calculator</title>
+    <link href="https://fonts.googleapis.com/css2?family=Kurale&display=swap" rel="stylesheet">
+
+    <style>
+        body, button, input, footer {
+            font-family: 'Kurale', serif;
+            background-color: #fff;
+            color: #000;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            border: none;
+            box-sizing: border-box;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .calculator {
+            padding: 20px;
+            border: 1px solid #000;
+        }
+
+        button {
+            padding: 10px 20px;
+            margin: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            border: 2px solid #000;
+        }
+
+        /* Adjust button colors based on their associated values */
+        /* [Updated with new symbols and colors] */
+
+        input {
+            width: 200px;
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #000;
+            background-color: #fff;
+            color: #000;
+        }
+
+        footer {
+            margin-top: 20px;
+            font-size: 0.8em;
+        }
+        h2 {
+            font-family: Arial, sans-serif;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="calculator">
+        <h2>Balanced Tridecimal Calculator</h2>
+        <input type="text" id="inputField" placeholder="Enter calculation">
+        <button onclick="clearInput()">C</button>
+        <br>
+        <button></button>
+        <button></button>
+        <button onclick="appendToInput('/')">/</button>
+        <br>
+        <button data-tridecimal="9" onclick="appendToInput('9')">9</button>
+        <button data-tridecimal="2" onclick="appendToInput('2')">2</button>
+        <button data-tridecimal="w" onclick="appendToInput('w')">w</button>
+        <button data-tridecimal="u" onclick="appendToInput('u')">u</button>
+        <br>
+        <button data-tridecimal="d" onclick="appendToInput('d')">d</button>
+        <button data-tridecimal="q" onclick="appendToInput('q')">q</button>
+        <button data-tridecimal="0" onclick="appendToInput('0')">0</button>
+        <button data-tridecimal="p" onclick="appendToInput('p')">p</button>
+        <button data-tridecimal="b" onclick="appendToInput('b')">b</button>
+<br>
+
+        <button data-tridecimal="n" onclick="appendToInput('n')">n</button>
+        <button data-tridecimal="m" onclick="appendToInput('m')">m</button>
+        <button data-tridecimal="5" onclick="appendToInput('5')">5</button>
+        <button data-tridecimal="6" onclick="appendToInput('6')">6</button>
+        <button data-tridecimal="7" onclick="appendToInput('7')">7</button>
+        <br>
+        <button onclick="appendToInput('+')">+</button>
+        <button onclick="appendToInput('×')">×</button>
+        <button></button>
+        <button></button>
+        <br>
+        <button onclick="calculate()">=</button>
+        <input type="text" id="outputField" readonly>
+        <br>
+        <footer>
+            Version: 0.0p
+        </footer>
+    </div>
+
+    <script>
+        // Define the symbols and their corresponding values for balanced tridecimal
+        const tridecimalSymbols = ['9', 'L', 'w', 'u', 'd', 'q', '0', 'p', 'b', 'n', 'm', '7', '6', '2', '5'];
+        const tridecimalValues = {
+            'L': -7, '9': -6, '2': -5, 'w': -4, 'u': -3, 'd': -2, 'q': -1,
+            '0': 0,
+            'p': 1, 'b': 2, 'n': 3, 'm': 4, '5': 5, '6': 6, '7': 7,
+        };
+
+        function balancedToDecimal(tridecimalStr) {
+            let decimalValue = 0;
+            let base = 1;
+            for (let i = tridecimalStr.length - 1; i >= 0; i--) {
+                decimalValue += tridecimalValues[tridecimalStr[i]] * base;
+                base *= 15;
+            }
+            return decimalValue;
+        }
+
+        function decimalToBalanced(decimalValue) {
+            if (decimalValue === 0) return '0';
+            let tridecimalStr = '';
+            while (decimalValue !== 0) {
+                let remainder = decimalValue % 15;
+                decimalValue = Math.floor(decimalValue / 15);
+                if (remainder > 7 {
+                    remainder -= 15;
+                    decimalValue += 1;
+                } else if (remainder < -7) {
+                    remainder += 15;
+                    decimalValue -= 1;
+                }
+                tridecimalStr = tridecimalSymbols[remainder + 7] + tridecimalStr;
+            }
+            return tridecimalStr;
+        }
+
+
+
+        // Perform the arithmetic operations and display the result
+        function calculate() {
+            const inputField = document.getElementById('inputField');
+            const inputStr = inputField.value;
+
+            let operands, operation;
+            if (inputStr.includes('+')) {
+                operands = inputStr.split('+');
+                operation = '+';
+            } else if (inputStr.includes('×')) {
+                operands = inputStr.split('×');
+                operation = '×';
+            } else if (inputStr.includes('/')) {
+                operands = inputStr.split('/');
+                operation = '/';
+            } else {
+                return;
+            }
+
+            const operand1Decimal = balancedToDecimal(operands[0]);
+            const operand2Decimal = balancedToDecimal(operands[1]);
+
+            let resultDecimal;
+            switch (operation) {
+                case '+':
+                    resultDecimal = operand1Decimal + operand2Decimal;
+                    break;
+                case '×':
+                    resultDecimal = operand1Decimal * operand2Decimal;
+                    break;
+                case '/':
+                    resultDecimal = operand1Decimal / operand2Decimal;
+                    break;
+            }
+
+            const resultUndecimal = decimalToBalanced(resultDecimal);
+
+            document.getElementById('outputField').value = resultUndecimal;
+        }
+
+        // Append a symbol to the input field
+        function appendToInput(symbol) {
+            const inputField = document.getElementById('inputField');
+            inputField.value += symbol;
+        }
+
+        // Clear the input and output fields
+        function clearInput() {
+            const inputField = document.getElementById('inputField');
+            inputField.value = '';
+            document.getElementById('outputField').value = '';
+        }
+    </script>
+</body>
+  </html
