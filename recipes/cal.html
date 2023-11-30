@@ -8,8 +8,8 @@
     <style>
         body, button, input, footer {
             font-family: 'Kurale', serif;
-            background-color: #fff;
-            color: #000;
+            background-color: #f4e9d8; /* Light sand color */
+            color: #5a4634; /* Dark brown text */
             text-align: center;
             margin: 0;
             padding: 0;
@@ -26,7 +26,7 @@
 
         .calculator {
             padding: 20px;
-            border: 1px solid #000;
+            border: 2px solid #8c7b6d; /* Earthy brown border */
         }
 
         button {
@@ -34,28 +34,31 @@
             margin: 5px;
             cursor: pointer;
             transition: background-color 0.3s;
-            border: 2px solid #000;
+            border: 2px solid #8c7b6d;
+            background-color: #d3c0a6; /* Light brown */
+            color: #5a4634; /* Dark brown text */
         }
 
-        /* Adjust button colors based on their associated values - 8 Shades of Gray */
-        button[data-pentadecimal="0"] { background-color: #f8f8f8; } /* Lightest */
-        button[data-pentadecimal="p"], button[data-pentadecimal="q"] { background-color: #e6e6e6; }
-        button[data-pentadecimal="b"], button[data-pentadecimal="d"] { background-color: #d4d4d4; }
-        button[data-pentadecimal="n"], button[data-pentadecimal="u"] { background-color: #b2b2b2; }
-        button[data-pentadecimal="m"], button[data-pentadecimal="w"] { background-color: #909090; }
-        button[data-pentadecimal="5"], button[data-pentadecimal="2"] { background-color: #6e6e6e; }
-        button[data-pentadecimal="6"], button[data-pentadecimal="9"] { background-color: #4c4c4c; color: #fff; } /* Dark with white text */
-        button[data-pentadecimal="7"], button[data-pentadecimal="L"] { background-color: #2a2a2a; color: #fff; } /* Darkest with white text */
-        button[onclick="appendToInput('+')"], button[onclick="appendToInput('×')"], button[onclick="appendToInput('/')"], button[onclick="calculate()"], button[onclick="clearInput()"] { background-color: #f0f0f0; } /* Function keys */
+        /* Desert Earth Tones for buttons */
+        button[data-pentadecimal="0"] { background-color: #e8dfcb; } /* Lightest */
+        button[data-pentadecimal="p"], button[data-pentadecimal="q"] { background-color: #e0d5bf; }
+        button[data-pentadecimal="b"], button[data-pentadecimal="d"] { background-color: #d8cbb3; }
+        button[data-pentadecimal="n"], button[data-pentadecimal="u"] { background-color: #d0c1a7; }
+        button[data-pentadecimal="m"], button[data-pentadecimal="w"] { background-color: #c8b79b; }
+        button[data-pentadecimal="5"], button[data-pentadecimal="2"] { background-color: #c0ad8f; }
+        button[data-pentadecimal="6"], button[data-pentadecimal="9"] { background-color: #b8a383; }
+        button[data-pentadecimal="7"], button[data-pentadecimal="L"] { background-color: #b09977; }
 
-        /* Other styles
+        /* Function keys */
+        button[onclick="appendToInput('+')"], button[onclick="appendToInput('×')"], button[onclick="appendToInput('/')"], button[onclick="calculate()"], button[onclick="clearInput()"] { background-color: #a88f6b; }
+
         input {
             width: 200px;
             padding: 10px;
             margin: 5px 0;
-            border: 1px solid #000;
-            background-color: #fff;
-            color: #000;
+            border: 1px solid #8c7b6d;
+            background-color: #f4e9d8;
+            color: #5a4634;
         }
 
         footer {
@@ -64,8 +67,11 @@
         }
         h2 {
             font-family: Arial, sans-serif;
+            color: #5a4634;
         }
     </style>
+
+
 </head>
 
 <body>
