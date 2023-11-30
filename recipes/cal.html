@@ -39,9 +39,21 @@
             border: 2px solid #000;
         }
 
-        /* Adjust button colors based on their associated values */
-        /* [Updated with new symbols and colors] */
+        /*
+        /* Existing styles ... */
 
+        /* Adjust button colors based on their associated values - 8 Shades of Gray */
+        button[data-tridecimal="0"] { background-color: #f8f8f8; } /* Lightest */
+        button[data-tridecimal="p"], button[data-tridecimal="q"] { background-color: #e6e6e6; }
+        button[data-tridecimal="b"], button[data-tridecimal="d"] { background-color: #d4d4d4; }
+        button[data-tridecimal="n"], button[data-tridecimal="u"] { background-color: #b2b2b2; }
+        button[data-tridecimal="m"], button[data-tridecimal="w"] { background-color: #909090; }
+        button[data-tridecimal="5"], button[data-tridecimal="2"] { background-color: #6e6e6e; }
+        button[data-tridecimal="6"], button[data-tridecimal="9"] { background-color: #4c4c4c; color: #fff; } /* Dark with white text */
+        button[data-tridecimal="7"], button[data-tridecimal="L"] { background-color: #2a2a2a; color: #fff; } /* Darkest with white text */
+        button[onclick="appendToInput('+')"], button[onclick="appendToInput('×')"], button[onclick="appendToInput('/')"], button[onclick="calculate()"], button[onclick="clearInput()"] { background-color: #f0f0f0; } /* Function keys */
+
+        /* Other styles ... */
         input {
             width: 200px;
             padding: 10px;
