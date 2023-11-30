@@ -22,7 +22,7 @@
     </table>
     <script>
         let currentPage = 1;
-        const rowsPerPage = 45;
+        const rowsPerPage = 30;
 
         function generateTable() {
             const table = document.getElementById('logTable');
@@ -42,7 +42,7 @@
                 let cell2 = row.insertCell();
                 let number = (currentPage - 1) * rowsPerPage + i;
                 cell1.innerHTML = number;
-                cell2.innerHTML = (Math.log(number) / Math.log(15)).toFixed(4); // Base 15 logarithm
+                cell2.innerHTML = (Math.log(number) / Math.log(15)).toFixed(7); // Base 15 logarithm
             }
         }
 
