@@ -1,12 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Balanced Pentadecimal Calculator</title>
     <link href="https://fonts.googleapis.com/css2?family=Kurale&display=swap" rel="stylesheet">
-
     <style>
         body, button, input, footer {
             font-family: 'Kurale', serif;
@@ -39,21 +37,18 @@
             border: 2px solid #000;
         }
 
-        /*
-        /* Existing styles ... */
-
         /* Adjust button colors based on their associated values - 8 Shades of Gray */
-        button[data-tridecimal="0"] { background-color: #f8f8f8; } /* Lightest */
-        button[data-tridecimal="p"], button[data-tridecimal="q"] { background-color: #e6e6e6; }
-        button[data-tridecimal="b"], button[data-tridecimal="d"] { background-color: #d4d4d4; }
-        button[data-tridecimal="n"], button[data-tridecimal="u"] { background-color: #b2b2b2; }
-        button[data-tridecimal="m"], button[data-tridecimal="w"] { background-color: #909090; }
-        button[data-tridecimal="5"], button[data-tridecimal="2"] { background-color: #6e6e6e; }
-        button[data-tridecimal="6"], button[data-tridecimal="9"] { background-color: #4c4c4c; color: #fff; } /* Dark with white text */
-        button[data-tridecimal="7"], button[data-tridecimal="L"] { background-color: #2a2a2a; color: #fff; } /* Darkest with white text */
+        button[data-pentadecimal="0"] { background-color: #f8f8f8; } /* Lightest */
+        button[data-pentadecimal="p"], button[data-pentadecimal="q"] { background-color: #e6e6e6; }
+        button[data-pentadecimal="b"], button[data-pentadecimal="d"] { background-color: #d4d4d4; }
+        button[data-pentadecimal="n"], button[data-pentadecimal="u"] { background-color: #b2b2b2; }
+        button[data-pentadecimal="m"], button[data-pentadecimal="w"] { background-color: #909090; }
+        button[data-pentadecimal="5"], button[data-pentadecimal="2"] { background-color: #6e6e6e; }
+        button[data-pentadecimal="6"], button[data-pentadecimal="9"] { background-color: #4c4c4c; color: #fff; } /* Dark with white text */
+        button[data-pentadecimal="7"], button[data-pentadecimal="L"] { background-color: #2a2a2a; color: #fff; } /* Darkest with white text */
         button[onclick="appendToInput('+')"], button[onclick="appendToInput('×')"], button[onclick="appendToInput('/')"], button[onclick="calculate()"], button[onclick="clearInput()"] { background-color: #f0f0f0; } /* Function keys */
 
-        /* Other styles ... */
+        /* Other styles
         input {
             width: 200px;
             padding: 10px;
@@ -75,8 +70,7 @@
 
 <body>
     <div class="calculator">
-        <h2>Balanced Tridecimal Calculator</h2>
-        <input type="text" id="inputField" placeholder="Enter calculation">
+        <h2>Balanced Pentadecimal Calculator</h2>        <input type="text" id="inputField" placeholder="Enter calculation">
         <button onclick="clearInput()">C</button>
         <br>
         <button onclick="appendToInput('/')">/</button>
@@ -107,7 +101,7 @@
         <input type="text" id="outputField" readonly>
         <br>
         <footer>
-            Version: 0.0p
+            Version: 0.0b
         </footer>
     </div>
 
