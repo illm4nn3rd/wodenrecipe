@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Balanced Tridecimal Calculator</title>
+    <title>Balanced Pentadecimal Calculator</title>
     <link href="https://fonts.googleapis.com/css2?family=Kurale&display=swap" rel="stylesheet">
 
     <style>
@@ -112,19 +112,19 @@
     </div>
 
     <script>
-        // Define the symbols and their corresponding values for balanced tridecimal
-        const tridecimalSymbols = ['9', 'L', 'w', 'u', 'd', 'q', '0', 'p', 'b', 'n', 'm', '7', '6', '2', '5'];
-        const tridecimalValues = {
+        // Define the symbols and their corresponding values for balanced pentadecimal
+        const pentadecimalSymbols = ['L', '9', '2', 'w', 'u', 'd', 'q', '0', 'p', 'b', 'n', 'm', '5', '6', '7'];
+        const pentadecimalValues = {
             'L': -7, '9': -6, '2': -5, 'w': -4, 'u': -3, 'd': -2, 'q': -1,
             '0': 0,
-            'p': 1, 'b': 2, 'n': 3, 'm': 4, '5': 5, '6': 6, '7': 7,
+            'p': 1, 'b': 2, 'n': 3, 'm': 4, '5': 5, '6': 6, '7': 7
         };
 
-        function balancedToDecimal(tridecimalStr) {
+        function balancedToDecimal(pentadecimalStr) {
             let decimalValue = 0;
             let base = 1;
-            for (let i = tridecimalStr.length - 1; i >= 0; i--) {
-                decimalValue += tridecimalValues[tridecimalStr[i]] * base;
+            for (let i = pentadecimalStr.length - 1; i >= 0; i--) {
+                decimalValue += pentadecimalValues[pentadecimalStr[i]] * base;
                 base *= 15;
             }
             return decimalValue;
@@ -132,23 +132,21 @@
 
         function decimalToBalanced(decimalValue) {
             if (decimalValue === 0) return '0';
-            let tridecimalStr = '';
+            let pentadecimalStr = '';
             while (decimalValue !== 0) {
                 let remainder = decimalValue % 15;
                 decimalValue = Math.floor(decimalValue / 15);
-                if (remainder > 7 {
+                if (remainder > 7) {
                     remainder -= 15;
                     decimalValue += 1;
                 } else if (remainder < -7) {
                     remainder += 15;
                     decimalValue -= 1;
                 }
-                tridecimalStr = tridecimalSymbols[remainder + 7] + tridecimalStr;
+                pentadecimalStr = pentadecimalSymbols[remainder + 7] + pentadecimalStr;
             }
-            return tridecimalStr;
+            return pentadecimalStr;
         }
-
-
 
         // Perform the arithmetic operations and display the result
         function calculate() {
@@ -185,9 +183,9 @@
                     break;
             }
 
-            const resultUndecimal = decimalToBalanced(resultDecimal);
+            const resultPentadecimal = decimalToBalanced(resultDecimal);
 
-            document.getElementById('outputField').value = resultUndecimal;
+            document.getElementById('outputField').value = resultPentadecimal;
         }
 
         // Append a symbol to the input field
