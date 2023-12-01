@@ -43,8 +43,8 @@
         /* Desert Earth Tones for buttons */
         button[data-pentadecimal="0"] { background-color: #e3c4a8; border: 2px solid #5C4033;} /* Lightest */
         button[data-pentadecimal="p"], button[data-pentadecimal="q"] { background-color: #d2b48c; }
-        button[data-pentadecimal="b"], button[data-pentadecimal="d"] { background-color: #b08e75; color: #f4e9d8;}
-        button[data-pentadecimal="n"], button[data-pentadecimal="u"] { background-color: #a07c60; color: #f4e9d8;}
+        button[data-pentadecimal="n"], button[data-pentadecimal="u"] { background-color: #b08e75; color: #f4e9d8;}
+        button[data-pentadecimal="b"], button[data-pentadecimal="d"] { background-color: #a07c60; color: #f4e9d8;}
         button[data-pentadecimal="m"], button[data-pentadecimal="w"] { background-color: #a07c60; color: #f4e9d8; border: 2px solid #5C4033;}
         button[data-pentadecimal="5"], button[data-pentadecimal="2"] { background-color: #8f6a4d; color: #f4e9d8;  border: 2px solid #5C4033;}
         button[data-pentadecimal="6"], button[data-pentadecimal="9"] { background-color: #8f6a4d; color: #f4e9d8;  border: 2px solid #5C4033;}
@@ -78,8 +78,8 @@
 </head>
 
 <body>
-    <div class="calculator">
-        <h2>B.P.C.</h2>        <input type="text" id="inputField" placeholder="Enter calculation">
+    <div class="calculator" style="vertical-align: top;">
+        <h2 align="right">B.P.C.</h2>        <input type="text" id="inputField" placeholder="Enter calculation">
         <button onclick="clearInput()">C</button>
         <br>
         <button data-pentadecimal="L" onclick="appendToInput('L')"style="font-style: italic;">L</button>
@@ -96,12 +96,12 @@
         <button data-pentadecimal="0" onclick="appendToInput('0')">0</button>
         <button data-pentadecimal="p" onclick="appendToInput('p')">p</button>
 <br>
-        <button data-pentadecimal="u" onclick="appendToInput('u')">u</button>
+        <button data-pentadecimal="d" onclick="appendToInput('d')">d</button>
 
-<button data-pentadecimal="d" onclick="appendToInput('d')">d</button>
+<button data-pentadecimal="u" onclick="appendToInput('u')">u</button>
 
-        <button data-pentadecimal="b" onclick="appendToInput('b')">b</button>
-<button data-pentadecimal="n" onclick="appendToInput('n')">n</button>
+        <button data-pentadecimal="n" onclick="appendToInput('n')">n</button>
+<button data-pentadecimal="b" onclick="appendToInput('b')">b</button>
         
 
         <br>
@@ -123,8 +123,12 @@
         <input type="text" id="outputField" readonly>
         <br>
         <footer>
-            Balanced Pentadecimal Calculator - Version: 0.0m
-            <br>as imagined by B.S.G.
+            <h5>Balanced Pentadecimal Calculator
+<br>
+                <h6>- Version: 0.0m
+<br>
+            <br>
+                as imagined by B.S.G. </h6>
         </footer>
     </div>
 
@@ -132,9 +136,9 @@
         // Define the symbols and their corresponding values for balanced pentadecimal
         const pentadecimalSymbols = ['L', '9', '2', 'w', 'u', 'd', 'q', '0', 'p', 'b', 'n', 'm', '5', '6', '7'];
         const pentadecimalValues = {
-            'L': -7, '9': -6, '2': -5, 'w': -4, 'u': -3, 'd': -2, 'q': -1,
+            'L': -7, '9': -6, '2': -5, 'w': -4, 'd': -3, 'u': -2, 'q': -1,
             '0': 0,
-            'p': 1, 'b': 2, 'n': 3, 'm': 4, '5': 5, '6': 6, '7': 7
+            'p': 1, 'n': 2, 'b': 3, 'm': 4, '5': 5, '6': 6, '7': 7
         };
 
         function balancedToDecimal(pentadecimalStr) {
