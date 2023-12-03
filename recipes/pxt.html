@@ -83,11 +83,11 @@ function generateTable() {
 
     table += '</tr>';
 
-    for (let i = 0; i <= 15; i += increment) {
+    for (let i = 0; i <= maxRange; i += increment) { // Changed to maxRange
         if (filter === 'prime' && !isPrime(i)) continue;
         if (filter === 'non-prime' && isPrime(i)) continue;
         table += `<tr><th>${balancedPentadecimal(i)}</th>`;
-        for (let j = 0; j <= 15; j += increment) {
+        for (let j = 0; j <= maxRange; j += increment) { // Changed to maxRange
             if (filter === 'prime' && !isPrime(j)) continue;
             if (filter === 'non-prime' && isPrime(j)) continue;
             table += `<td>${balancedPentadecimal(i * j)}</td>`;
@@ -98,6 +98,7 @@ function generateTable() {
     table += '</table>';
     tableContainer.innerHTML = table;
 }
+
 
 function increaseIncrement() {
     let incrementInput = document.getElementById('increment');
