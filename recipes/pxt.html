@@ -20,6 +20,7 @@
     <label for="increment">Increment:</label>
     <input type="number" id="increment" value="1" min="1" max="15">
     <button onclick="generateTable()">Generate Table</button>
+    <button onclick="increaseIncrement()">Increase Increment</button>
 
     <label for="filter">Filter:</label>
     <select id="filter">
@@ -91,6 +92,15 @@ function generateTable() {
 
     table += '</table>';
     tableContainer.innerHTML = table;
+}
+
+function increaseIncrement() {
+    let incrementInput = document.getElementById('increment');
+    let currentIncrement = parseInt(incrementInput.value);
+    if (currentIncrement < 15) {
+        incrementInput.value = currentIncrement + 1;
+        generateTable();
+    }
 }
 
 window.onload = generateTable;
