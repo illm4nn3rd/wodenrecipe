@@ -20,7 +20,7 @@
     <label for="increment">Increment:</label>
     <input type="number" id="increment" value="1" min="1" max="15">
     <button onclick="generateTable()">Generate Table</button>
-    <button onclick="increaseIncrement()">Increase Increment</button>
+    <button onclick="expandTable()">Expand Table</button>
 
     <label for="filter">Filter:</label>
     <select id="filter">
@@ -33,6 +33,7 @@
 
     <script>
 const symbols = ['L', '9', '2', 'w', 'd', 'u', 'q', '0', 'p', 'n', 'b', 'm', '5', '6', '7'];
+let maxRange = 15; // Initial range for the table
 
 function balancedPentadecimal(num) {
     if (num >= -7 && num <= 7) {
@@ -56,6 +57,10 @@ function balancedPentadecimal(num) {
     }
 }
 
+
+
+
+
 function isPrime(num) {
     if (num <= 1) return false;
     for (let i = 2; i <= Math.sqrt(num); i++) {
@@ -70,7 +75,7 @@ function generateTable() {
     const tableContainer = document.getElementById('tableContainer');
     let table = '<table><tr><th>*</th>';
 
-    for (let i = 0; i <= 15; i += increment) {
+    for (let i = 0; i <= maxRange; i += increment) {
         if (filter === 'prime' && !isPrime(i)) continue;
         if (filter === 'non-prime' && isPrime(i)) continue;
         table += `<th>${balancedPentadecimal(i)}</th>`;
@@ -101,10 +106,14 @@ function increaseIncrement() {
         incrementInput.value = currentIncrement + 1;
         generateTable();
     }
+            }
+
+function expandTable() {
+    maxRange += 15; // Increase the range by 15
+    generateTable(); // Regenerate the table with the new range
 }
 
 window.onload = generateTable;
-
 </script>
 </body>
 </html>
