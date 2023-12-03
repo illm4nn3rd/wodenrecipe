@@ -32,89 +32,72 @@
     <div id="tableContainer"></div>
 
     <script>
-const symbols = ['L', '9', '2', 'w', 'd', 'u', 'q', '0', 'p', 'n', 'b', 'm', '5', '6', '7'];
-let maxRange = 15; // Initial range for the table
+        const symbols = ['L', '9', '2', 'w', 'd', 'u', 'q', '0', 'p', 'n', 'b', 'm', '5', '6', '7'];
+        let maxRange = 15; // Initial range for the table
 
-function balancedPentadecimal(num) {
-    if (num >= -7 && num <= 7) {
-        return symbols[num + 7];
-    } else {
-        let result = '';
-        let remainder;
-        while (num !== 0) {
-            remainder = num % 15;
-            num = Math.floor(num / 15);
-            if (remainder < -7) {
-                remainder += 15;
-                num -= 1;
-            } else if (remainder > 7) {
-                remainder -= 15;
-                num += 1;
+        function balancedPentadecimal(num) {
+            if (num >= -7 && num <= 7) {
+                return symbols[num + 7];
+            } else {
+                let result = '';
+                let remainder;
+                while (num !== 0) {
+                    remainder = num % 15;
+                    num = Math.floor(num / 15);
+                    if (remainder < -7) {
+                        remainder += 15;
+                        num -= 1;
+                    } else if (remainder > 7) {
+                        remainder -= 15;
+                        num += 1;
+                    }
+                    result = symbols[remainder + 7] + result;
+                }
+                return result || '0';
             }
-            result = symbols[remainder + 7] + result;
         }
-        return result || '0';
-    }
-}
 
-
-
-
-
-function isPrime(num) {
-    if (num <= 1) return false;
-    for (let i = 2; i <= Math.sqrt(num); i++) {
-        if (num % i === 0) return false;
-    }
-    return true;
-}
-
-function generateTable() {
-    const increment = parseInt(document.getElementById('increment').value);
-    const filter = document.getElementById('filter').value;
-    const tableContainer = document.getElementById('tableContainer');
-    let table = '<table><tr><th>*</th>';
-
-    for (let i = 0; i <= maxRange; i += increment) {
-        if (filter === 'prime' && !isPrime(i)) continue;
-        if (filter === 'non-prime' && isPrime(i)) continue;
-        table += `<th>${balancedPentadecimal(i)}</th>`;
-    }
-
-    table += '</tr>';
-
-    for (let i = 0; i <= maxRange; i += increment) { // Changed to maxRange
-        if (filter === 'prime' && !isPrime(i)) continue;
-        if (filter === 'non-prime' && isPrime(i)) continue;
-        table += `<tr><th>${balancedPentadecimal(i)}</th>`;
-        for (let j = 0; j <= maxRange; j += increment) { // Changed to maxRange
-            if (filter === 'prime' && !isPrime(j)) continue;
-            if (filter === 'non-prime' && isPrime(j)) continue;
-            table += `<td>${balancedPentadecimal(i * j)}</td>`;
+        function isPrime(num) {
+            if (num <= 1) return false;
+            for (let i = 2; i <= Math.sqrt(num); i++) {
+                if (num % i === 0) return false;
+            }
+            return true;
         }
-        table += '</tr>';
-    }
 
-    table += '</table>';
-    tableContainer.innerHTML = table;
-}
+        function generateTable() {
+            const increment = parseInt(document.getElementById('increment').value);
+            const filter = document.getElementById('filter').value;
+            const tableContainer = document.getElementById('tableContainer');
+            let table = '<table><tr><th>*</th>';
 
-
-function increaseIncrement() {
-    let incrementInput = document.getElementById('increment');
-    let currentIncrement = parseInt(incrementInput.value);
-    if (currentIncrement < 15) {
-        incrementInput.value = currentIncrement + 1;
-        generateTable();
-    }
+            for (let i = 0; i <= maxRange; i += increment) {
+                if ((filter === 'prime' && !isPrime(i)) || (filter === 'non-prime' && isPrime(i))) continue;
+                table += `<th>${balancedPentadecimal(i)}</th>`;
             }
 
-function expandTable() {
-    maxRange += 15; // Increase the range by 15
-    generateTable(); // Regenerate the table with the new range
-}
+            table += '</tr>';
 
-window.onload = generateTable;
-</script>
+            for (let i = 0; i <= maxRange; i += increment) {
+                if ((filter === 'prime' && !isPrime(i)) || (filter === 'non-prime' && isPrime(i))) continue;
+                table += `<tr><th>${balancedPentadecimal(i)}</th>`;
+                for (let j = 0; j <= maxRange; j += increment) {
+                    if ((filter === 'prime' && !isPrime(j)) || (filter === 'non-prime' && isPrime(j))) continue;
+                    table += `<td>${balancedPentadecimal(i * j)}</td>`;
+                }
+                table += '</tr>';
+            }
+
+            table += '</table>';
+            tableContainer.innerHTML = table;
+        }
+
+        function expandTable() {
+            maxRange += 15; // Increase the range by 15
+            generateTable(); // Regenerate the table with the new range
+        }
+
+        window.onload = generateTable;
+    </script>
 </body>
 </html>
