@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Balanced Pentadecimal Multiplication Table</title>
+    <style>
+        table, th, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+            padding: 5px;
+            text-align: center;
+        }
+        table {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h2>Balanced Pentadecimal Multiplication Table</h2>
+
+    <label for="increment">Increment:</label>
+    <input type="number" id="increment" value="1" min="1" max="15">
+    <button onclick="generateTable()">Generate Table</button>
+
+    <label for="filter">Filter:</label>
+    <select id="filter">
+        <option value="all">All</option>
+        <option value="prime">Primes</option>
+        <option value="non-prime">Non-Primes</option>
+    </select>
+
+    <div id="tableContainer"></div>
+
+    <script>
+const symbols = ['L', '9', '2', 'w', 'd', 'u', 'q', '0', 'p', 'n', 'b', 'm', '5', '6', '7'];
+
+function balancedPentadecimal(num) {
+    if (num >= -7 && num <= 7) {
+        return symbols[num + 7];
+    } else {
+        let result = '';
+        let remainder;
+        while (num !== 0) {
+            remainder = num % 15;
+            num = Math.floor(num / 15);
+            if (remainder < -7) {
+                remainder += 15;
+                num -= 1;
+            } else if (remainder > 7) {
+                remainder -= 15;
+                num += 1;
+            }
+            result = symbols[remainder + 7] + result;
+        }
+        return result || '0';
+    }
+}
+
+function isPrime(num) {
+    if (num <= 1) return false;
+    for (let i = 2; i <= Math.sqrt(num); i++) {
+        if (num % i === 0) return false;
+    }
+    return true;
+}
+
+function generateTable() {
+    const increment = parseInt(document.getElementById('increment').value);
+    const filter = document.getElementById('filter').value;
+    const tableContainer = document.getElementById('tableContainer');
+    let table = '<table><tr><th>*</th>';
+
+    for (let i = 0; i <= 15; i += increment) {
+        if (filter === 'prime' && !isPrime(i)) continue;
+        if (filter === 'non-prime' && isPrime(i)) continue;
+        table += `<th>${balancedPentadecimal(i)}</th>`;
+    }
+
+    table += '</tr>';
+
+    for (let i = 0; i <= 15; i += increment) {
+        if (filter === 'prime' && !isPrime(i)) continue;
+        if (filter === 'non-prime' && isPrime(i)) continue;
+        table += `<tr><th>${balancedPentadecimal(i)}</th>`;
+        for (let j = 0; j <= 15; j += increment) {
+            if (filter === 'prime' && !isPrime(j)) continue;
+            if (filter === 'non-prime' && isPrime(j)) continue;
+            table += `<td>${balancedPentadecimal(i * j)}</td>`;
+        }
+        table += '</tr>';
+    }
+
+    table += '</table>';
+    tableContainer.innerHTML = table;
+}
+
+window.onload = generateTable;
+
+</script>
+</body>
+</html>
