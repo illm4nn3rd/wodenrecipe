@@ -1,13 +1,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Complex Password Permutation Generator</title>
+    <title>Number Jumbler</title>
     <script>
         function customBase69ToBase10Conversion(input) {
-            // Define the custom base-69 set
             const base69Set = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$%^&*(";
-
-            // Convert the input to uppercase for case-insensitivity
             const uppercaseInput = input.toUpperCase();
 
             let base10Representation = 0;
@@ -16,7 +13,7 @@
             for (let i = 0; i < uppercaseInput.length; i++) {
                 const char = uppercaseInput[i];
                 const charValue = base69Set.indexOf(char);
-                
+
                 if (charValue === -1) {
                     // Invalid character, handle as needed (skip, show error, etc.)
                     continue;
@@ -29,6 +26,25 @@
             return base10Representation;
         }
 
+        function applyCaseAndSymbolTransformations(password) {
+            let result = "";
+            for (let i = 0; i < password.length; i++) {
+                const currentChar = password[i];
+                if (/[0-9]/.test(currentChar)) {
+                    // Replace numbers with respective symbols
+                    const symbol = "!@#$%^&*(".charAt(parseInt(currentChar));
+                    result += symbol;
+                } else if (/[A-Za-z]/.test(currentChar)) {
+                    // Swap case for letters
+                    result += (currentChar === currentChar.toLowerCase()) ? currentChar.toUpperCase() : currentChar.toLowerCase();
+                } else {
+                    // Keep other characters unchanged
+                    result += currentChar;
+                }
+            }
+            return result;
+        }
+
         function displayXForPermutation(permutationType, x) {
             const resultElement = document.getElementById(`${permutationType}Result`);
             resultElement.innerText = `${permutationType} Level: k = 1260 * (15^${x}), x = ${x}`;
@@ -37,33 +53,28 @@
         function generatePermutations() {
             const inputPassword = document.getElementById("inputPassword").value;
 
-            // Low level permutation: add current year to the end of the string
+            // Low level permutation: add the current year to the end of the string
             const lowLevelPermutation = inputPassword + (new Date().getFullYear());
             const lowLevelX = customBase69ToBase10Conversion(lowLevelPermutation);
+            displayXForPermutation("Low", lowLevelX);
 
-            // Medium level permutation: change capitalization every 2 characters
-            let mediumLevelPermutation = "";
-            for (let i = 0; i < inputPassword.length; i++) {
-                mediumLevelPermutation += (i % 2 === 0) ? inputPassword[i].toLowerCase() : inputPassword[i].toUpperCase();
-            }
+            // Medium level permutation: apply case and symbol transformations
+            const mediumLevelPermutation = applyCaseAndSymbolTransformations(inputPassword);
             const mediumLevelX = customBase69ToBase10Conversion(mediumLevelPermutation);
+            displayXForPermutation("Medium", mediumLevelX);
 
             // High level permutation: add "!!" at the beginning and end of the string
             const highLevelPermutation = "!!" + inputPassword + "!!";
             const highLevelX = customBase69ToBase10Conversion(highLevelPermutation);
-
-            // Display x for each permutation
-            displayXForPermutation("Low", lowLevelX);
-            displayXForPermutation("Medium", mediumLevelX);
             displayXForPermutation("High", highLevelX);
         }
     </script>
 </head>
 <body>
-    <h2>Complex Password Permutation Generator</h2>
+    <h2>Number Jumbler</h2>
 
-    <label for="inputPassword">Enter a Complex Password:</label>
-    <input type="text" id="inputPassword" placeholder="Input password">
+    <label for="inputPassword">Enter a Complex Number:</label>
+    <input type="text" id="inputPassword" placeholder="Input number">
 
     <button onclick="generatePermutations()">Generate Permutations</button>
 
