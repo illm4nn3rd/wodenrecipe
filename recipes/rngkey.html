@@ -15,10 +15,13 @@
     <h2>Versions:</h2>
     <p id="version1"></p>
     <p id="base10Representation1"></p>
+    <p id="transformation1"></p>
     <p id="version2"></p>
     <p id="base10Representation2"></p>
+    <p id="transformation2"></p>
     <p id="version3"></p>
     <p id="base10Representation3"></p>
+    <p id="transformation3"></p>
 
     <script>
         function modifyString() {
@@ -28,11 +31,25 @@
             var version3 = "!!" + version2 + "!!";
 
             document.getElementById("version1").innerText = "Version 1: " + version1;
-            document.getElementById("base10Representation1").innerText = "Base 10 Representation: " + convertToBase69(version1);
+            var base10Representation1 = convertToBase69(version1);
+            document.getElementById("base10Representation1").innerText = "Base 10 Representation: " + base10Representation1;
+            document.getElementById("transformation1").innerText = "Transformation: " + calculateTransformation(base10Representation1);
+
             document.getElementById("version2").innerText = "Version 2: " + version2;
-            document.getElementById("base10Representation2").innerText = "Base 10 Representation: " + convertToBase69(version2);
+            var base10Representation2 = convertToBase69(version2);
+            document.getElementById("base10Representation2").innerText = "Base 10 Representation: " + base10Representation2;
+            document.getElementById("transformation2").innerText = "Transformation: " + calculateTransformation(base10Representation2);
+
             document.getElementById("version3").innerText = "Version 3: " + version3;
-            document.getElementById("base10Representation3").innerText = "Base 10 Representation: " + convertToBase69(version3);
+            var base10Representation3 = convertToBase69(version3);
+            document.getElementById("base10Representation3").innerText = "Base 10 Representation: " + base10Representation3;
+            document.getElementById("transformation3").innerText = "Transformation: " + calculateTransformation(base10Representation3);
+        }
+
+        function calculateTransformation(base10Number) {
+            var x = Math.log(base10Number / 1260) / Math.log(15);
+            var xString = x.toFixed(20); // Ensure sufficient precision
+            return xString;
         }
 
         function modifyCaseAndSymbols(inputString) {
