@@ -139,15 +139,15 @@
 
     if (symbol === '.') {
         const lastChar = currentInput.charAt(currentInput.length - 1);
-        if (!lastChar || ['+', '×', '/'].includes(lastChar)) {
+        if (!lastChar || ['+', '×', '/'].includes(lastChar) || currentInput.includes('b.')) {
             inputField.value += '0.';
         } else if (!currentInput.includes('.')) {
             inputField.value += '.';
         }
     } else if (symbol === '1' || symbol === '0') {
         // Add binary decimal digits after binary decimal point
-        const regex = /(?:[×/])?[0-9.]*[b]/;
-        if (regex.test(currentInput)) {
+        const regex = /(?:[×/])?[0-9.]+[1-9][0-9]*[b]/;
+        if (regex.test(currentInput) || currentInput === '' || lastChar === 'b') {
             inputField.value += symbol;
         } else {
             inputField.value += symbol;
@@ -156,6 +156,7 @@
         inputField.value += symbol;
     }
 }
+
 
 
 
