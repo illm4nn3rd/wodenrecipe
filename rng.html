@@ -67,6 +67,18 @@
             const highLevelPermutation = "!!" + inputPassword + "!!";
             const highLevelX = customBase69ToBase10Conversion(highLevelPermutation);
             displayXForPermutation("High", highLevelX);
+
+            // Additional permutations
+            const permutations = [
+                inputPassword + (new Date().getFullYear() * 2),
+                applyCaseAndSymbolTransformations(inputPassword + (new Date().getFullYear() * 2)),
+                "!!" + inputPassword + (new Date().getFullYear() * 2) + "!!"
+            ];
+
+            for (let i = 0; i < permutations.length; i++) {
+                const permutationX = customBase69ToBase10Conversion(permutations[i]);
+                displayXForPermutation(`Permutation ${i + 1}`, permutationX);
+            }
         }
     </script>
 </head>
@@ -81,5 +93,8 @@
     <div id="lowLevelResult"></div>
     <div id="mediumLevelResult"></div>
     <div id="highLevelResult"></div>
+    <div id="Permutation1Result"></div>
+    <div id="Permutation2Result"></div>
+    <div id="Permutation3Result"></div>
 </body>
 </html>
