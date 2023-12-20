@@ -14,9 +14,11 @@
 
     <h2>Versions:</h2>
     <p id="version1"></p>
+    <p id="base10Representation1"></p>
     <p id="version2"></p>
+    <p id="base10Representation2"></p>
     <p id="version3"></p>
-    <p id="base10Representation"></p>
+    <p id="base10Representation3"></p>
 
     <script>
         function modifyString() {
@@ -26,12 +28,11 @@
             var version3 = "!!" + version2 + "!!";
 
             document.getElementById("version1").innerText = "Version 1: " + version1;
+            document.getElementById("base10Representation1").innerText = "Base 10 Representation: " + convertToBase69(version1);
             document.getElementById("version2").innerText = "Version 2: " + version2;
+            document.getElementById("base10Representation2").innerText = "Base 10 Representation: " + convertToBase69(version2);
             document.getElementById("version3").innerText = "Version 3: " + version3;
-
-            // Convert to base69 and display base 10
-            var base69Number = convertToBase69(version2);
-            document.getElementById("base10Representation").innerText = "Base 10 Representation: " + base69Number;
+            document.getElementById("base10Representation3").innerText = "Base 10 Representation: " + convertToBase69(version3);
         }
 
         function modifyCaseAndSymbols(inputString) {
