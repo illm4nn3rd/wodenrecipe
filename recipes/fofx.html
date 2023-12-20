@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Base69 Calculation</title>
+</head>
+<body>
+    <h1>Base69 Calculation</h1>
+    
+    <label for="base69Number">Enter a base69 number:</label>
+    <input type="text" id="base69Number">
+    <button onclick="calculateX()">Calculate X</button>
+
+    <h2>Result:</h2>
+    <p id="result"></p>
+
+    <script>
+        function calculateX() {
+            var base69Number = document.getElementById("base69Number").value;
+            var base10Number = convertToBase10(base69Number);
+
+            // Calculate x
+            var x = Math.log(base10Number / 1260) / Math.log(15);
+
+            // Display x in base69 format, up to 16 characters
+            var xBase69 = convertToBase69(x.toFixed(16));
+            document.getElementById("result").innerText = "X in Base69: " + xBase69;
+        }
+
+        function convertToBase10(str) {
+            var base69Chars = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$%^&*(";
+            var base10Number = 0;
+            for (var i = 0; i < str.length; i++) {
+                var char = str.charAt(i);
+                var index = base69Chars.indexOf(char);
+                base10Number = base10Number * 69 + index;
+            }
+            return base10Number;
+        }
+
+        function convertToBase69(num) {
+            var base69Chars = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$%^&*(";
+            var base69String = "";
+            while (num > 0 && base69String.length < 16) {
+                var remainder = num % 69;
+                base69String = base69Chars.charAt(remainder) + base69String;
+                num = Math.floor(num / 69);
+            }
+            return base69String || "0";
+        }
+    </script>
+</body>
+</html>
