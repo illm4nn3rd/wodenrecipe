@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>String Modification</title>
+</head>
+<body>
+    <h1>String Modification</h1>
+    
+    <label for="inputString">Enter a string:</label>
+    <input type="text" id="inputString">
+    
+    <label for="base">Base for Transformation:</label>
+    <input type="number" id="base" value="15">
+
+    <label for="logBase">Logarithm Base:</label>
+    <input type="number" id="logBase" value="2">
+
+    <button onclick="modifyString()">Modify</button>
+
+    <h2>Versions:</h2>
+    <p id="version1"></p>
+    <p id="base10Representation1"></p>
+    <p id="transformation1"></p>
+    <p id="version2"></p>
+    <p id="base10Representation2"></p>
+    <p id="transformation2"></p>
+    <p id="version3"></p>
+    <p id="base10Representation3"></p>
+    <p id="transformation3"></p>
+
+    <script>
+        function modifyString() {
+            var inputString = document.getElementById("inputString").value;
+            var baseValue = parseInt(document.getElementById("base").value);
+            var logBaseValue = parseInt(document.getElementById("logBase").value);
+
+            var version1 = inputString + "4146";
+            var version2 = modifyCaseAndSymbols(inputString + "4146");
+            var version3 = "!!" + version2 + "!!";
+
+            document.getElementById("version1").innerText = "Version 1: " + version1;
+            var base10Representation1 = convertToBaseN(version1, baseValue);
+            document.getElementById("base10Representation1").innerText = "Base 10 Representation: " + base10Representation1;
+            document.getElementById("transformation1").innerText = "Transformation: " + calculateTransformation(base10Representation1, logBaseValue);
+
+            document.getElementById("version2").innerText = "Version 2: " + version2;
+            var base10Representation2 = convertToBaseN(version2, baseValue);
+            document.getElementById("base10Representation2").innerText = "Base 10 Representation: " + base10Representation2;
+            document.getElementById("transformation2").innerText = "Transformation: " + calculateTransformation(base10Representation2, logBaseValue);
+
+            document.getElementById("version3").innerText = "Version 3: " + version3;
+            var base10Representation3 = convertToBaseN(version3, baseValue);
+            document.getElementById("base10Representation3").innerText = "Base 10 Representation: " + base10Representation3;
+            document.getElementById("transformation3").innerText = "Transformation: " + calculateTransformation(base10Representation3, logBaseValue);
+        }
+
+        function calculateTransformation(base10Number, logBase) {
+            var x = Math.log(base10Number) / Math.log(logBase);
+            var xString = x.toFixed(20); // Ensure sufficient precision
+            return xString;
+        }
+
+        function modifyCaseAndSymbols(inputString) {
+            // Your symbol replacement logic here
+            // For simplicity, keeping it as is for now
+            return inputString;
+        }
+
+        function convertToBaseN(str, base) {
+            var baseNChars = "";
+            for (var i = 0; i < 1260; i++) {
+                baseNChars += String.fromCodePoint(48 + i); // Unicode code points for digits 0-9
+            }
+            
+            var base10Number = 0;
+            for (var i = 0; i < str.length; i++) {
+                var char = str.charAt(i);
+                var index = baseNChars.indexOf(char);
+                base10Number = base10Number * base + index;
+            }
+            return base10Number;
+        }
+    </script>
+</body>
+</html>
