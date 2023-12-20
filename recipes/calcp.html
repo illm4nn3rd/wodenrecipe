@@ -133,7 +133,6 @@
         };
 
         function appendToInput(symbol) {
-        function appendToInput(symbol) {
     const inputField = document.getElementById('inputField');
     const currentInput = inputField.value;
 
@@ -159,32 +158,37 @@
 
 
         function balancedToDecimal(pentadecimalStr) {
-            let decimalValue = 0;
-            let base = 1;
-            for (let i = pentadecimalStr.length - 1; i >= 0; i--) {
-                decimalValue += pentadecimalValues[pentadecimalStr[i]] * base;
-                base *= 15;
-            }
-            return decimalValue;
+            lefunction balancedToDecimal(pentadecimalStr) {
+    let decimalValue = 0;
+    let base = 1;
+    for (let i = pentadecimalStr.length - 1; i >= 0; i--) {
+        if (pentadecimalStr[i] === 'p') {
+            decimalValue += 0.5 * base;
+        } else {
+            decimalValue += pentadecimalValues[pentadecimalStr[i]] * base;
         }
+        base *= 15;
+    }
+    return decimalValue;
+}
 
-        function decimalToBalanced(decimalValue) {
-            if (decimalValue === 0) return '0';
-            let pentadecimalStr = '';
-            while (decimalValue !== 0) {
-                let remainder = decimalValue % 15;
-                decimalValue = Math.floor(decimalValue / 15);
-                if (remainder > 7) {
-                    remainder -= 15;
-                    decimalValue += 1;
-                } else if (remainder < -7) {
-                    remainder += 15;
-                    decimalValue -= 1;
-                }
-                pentadecimalStr = pentadecimalSymbols[remainder + 7] + pentadecimalStr;
-            }
-            return pentadecimalStr;
+function decimalToBalanced(decimalValue) {
+    if (decimalValue === 0) return '0';
+    let pentadecimalStr = '';
+    while (decimalValue !== 0) {
+        let remainder = decimalValue % 15;
+        decimalValue = Math.floor(decimalValue / 15);
+        if (remainder > 7) {
+            remainder -= 15;
+            decimalValue += 1;
+        } else if (remainder < -7) {
+            remainder += 15;
+            decimalValue -= 1;
         }
+        pentadecimalStr = pentadecimalSymbols[remainder + 7] + pentadecimalStr;
+    }
+    return pentadecimalStr;
+}
 
         function calculate() {
                 const inputField = document.getElementById('inputField');
