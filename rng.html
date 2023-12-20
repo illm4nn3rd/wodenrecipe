@@ -47,7 +47,8 @@
 
         function displayXForPermutation(permutationType, x) {
             const resultElement = document.getElementById(`${permutationType}Result`);
-            resultElement.innerText = `${permutationType} Level: k = 1260 * (15^${x}), x = ${x}`;
+            const truncatedX = x.toString().substring(0, permutationType === "Low" ? 8 : permutationType === "Medium" ? 64 : 4096);
+            resultElement.innerText = `${permutationType} Level: k = 1260 * (15^${truncatedX}), x = ${truncatedX}`;
         }
 
         function generatePermutations() {
