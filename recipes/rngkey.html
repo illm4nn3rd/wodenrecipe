@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>String Modification</title>
+</head>
+<body>
+    <h1>String Modification</h1>
+    
+    <label for="inputString">Enter a string:</label>
+    <input type="text" id="inputString">
+    <button onclick="modifyString()">Modify</button>
+
+    <h2>Versions:</h2>
+    <p id="version1"></p>
+    <p id="version2"></p>
+    <p id="version3"></p>
+
+    <script>
+        function modifyString() {
+            var inputString = document.getElementById("inputString").value;
+            var version1 = inputString + "4146";
+            var version2 = modifyCaseAndSymbols(inputString);
+            var version3 = "!!" + version2 + "!!";
+
+            document.getElementById("version1").innerText = "Version 1: " + version1;
+            document.getElementById("version2").innerText = "Version 2: " + version2;
+            document.getElementById("version3").innerText = "Version 3: " + version3;
+
+            // Convert to base69 and display base 10
+            var base69Number = convertToBase69(version2);
+            alert("Base 10 Representation: " + base69Number);
+        }
+
+        function modifyCaseAndSymbols(inputString) {
+            var modifiedString = "";
+            for (var i = 0; i < inputString.length; i++) {
+                var char = inputString.charAt(i);
+                if (i % 2 === 0) {
+                    // Change case for even-indexed characters
+                    modifiedString += char === char.toLowerCase() ? char.toUpperCase() : char.toLowerCase();
+                } else {
+                    // Swap characters with symbols for odd-indexed characters
+                    switch (char) {
+                        case '1': modifiedString += '!'; break;
+                        case '2': modifiedString += '@'; break;
+                        case '3': modifiedString += '#'; break;
+                        case '4': modifiedString += '$'; break;
+                        case '5': modifiedString += '%'; break;
+                        case '6': modifiedString += '^'; break;
+                        case '7': modifiedString += '&'; break;
+                        case '8': modifiedString += '*'; break;
+                        case '9': modifiedString += '('; break;
+                        case '0': modifiedString += ')'; break;
+                        default: modifiedString += char;
+                    }
+                }
+            }
+            return modifiedString;
+        }
+
+        function convertToBase69(str) {
+            var base69Chars = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$%^&*(";
+            var base10Number = 0;
+            for (var i = 0; i < str.length; i++) {
+                var char = str.charAt(i);
+                var index = base69Chars.indexOf(char);
+                base10Number = base10Number * 69 + index;
+            }
+            return base10Number;
+        }
+    </script>
+</body>
+</html>
