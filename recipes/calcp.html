@@ -115,131 +115,7 @@
             <h6>as imagined by B.S.G.</h6>
         </footer>
     </div>
-
-    <script>
-        const pentadecimalSymbols = ['L', '9', '2', 'w', 'd', 'u', 'q', '0', 'p', 'n', 'b', 'm', '5', '6', '7'];
-        const pentadecimalValues = {
-            'L': -7, '9': -6, '2': -5, 'w': -4, 'd': -3, 'u': -2, 'q': -1,
-            '0': 0,
-            'p': 1, 'n': 2, 'b': 3, 'm': 4, '5': 5, '6': 6, '7': 7
-        };
-
-        function appendToInput(symbol) {
-            const inputField = document.getElementById('inputField');
-            const currentInput = inputField.value;
-
-            if (symbol === '.') {
-                // Handle special cases for decimal point
-                // ...
-            } else if (symbol === '1' || symbol === '0') {
-                // Simplified binary decimal check
-                // ...
-            } else {
-                inputField.value += symbol;
-            }
-        }
-
-        function balancedToDecimal(pentadecimalStr) {
-            let decimalValue = 0;
-            let base = 1;
-            for (let i = pentadecimalStr.length - 1; i >= 0; i--) {
-                if (pentadecimalStr[i] === 'p') {
-                    decimalValue += 0.5 * base;
-                } else {
-                    decimalValue += pentadecimalValues[pentadecimalStr[i]] * base;
-                }
-                base *= 15;
-            }
-            return decimalValue;
-        }
-
-        function decimalToBalanced(decimalValue) {
-            // Implementation unchanged
-            // ...
-        }
-
-        function calculate() {
-            const inputField = document.getElementById('inputField');
-            const inputStr = inputField.value;
-
-            let operands, operation;
-            if (inputStr.includes('+')) {
-                operands = inputStr.split('+');
-                operation = '+';
-            } else if (inputStr.includes('×')) {
-                operands = inputStr.split('×');
-                operation = '×';
-            } else if (inputStr.includes('/')) {
-                operands = inputStr.split('/');
-                operation = '/';
-            } else {
-                return;
-            }
-
-            const operand1Decimal = balancedToDecimal(operands[0]);
-            const operand2Decimal = balancedToDecimal(operands[1]);
-
-            let resultDecimal;
-            switch (operation) {
-                case '+':
-                    resultDecimal = operand1Decimal + operand2Decimal;
-                    break;
-                case '×':
-                    // Check for multiplication involving "0.p"
-                    // ...
-                    break;
-                case '/':
-                    // Check for division by "pO"
-                    // ...
-                    break;
-            }
-
-            const resultPentadecimal = decimalToBalanced(resultDecimal);
-
-            document.getElementById('outputField').value = resultPentadecimal;
-        }
-
-        function clearInput() {
-            const inputField = document.getElementById('inputField');
-            inputField.value = '';
-            document.getElementById('outputField').value = '';
-        }
-    </script>
-</body>
-</html>
-
-        <button data-pentadecimal="q" onclick="appendToInput('q')">q</button>
-        <button data-pentadecimal="0" onclick="appendToInput('0')">0</button>
-        <button data-pentadecimal="p" onclick="appendToInput('p')">p</button>
-        <br>
-        <button data-pentadecimal="d" onclick="appendToInput('d')">d</button>
-        <button data-pentadecimal="u" onclick="appendToInput('u')">u</button>
-        <button data-pentadecimal="n" onclick="appendToInput('n')">n</button>
-        <button data-pentadecimal="b" onclick="appendToInput('b')">b</button>
-        <br>
-        <button data-pentadecimal="2" onclick="appendToInput('2')">2</button>
-        <button data-pentadecimal="w" onclick="appendToInput('w')">w</button>
-        <button data-pentadecimal="m" onclick="appendToInput('m')">m</button>
-        <button data-pentadecimal="5" onclick="appendToInput('5')">5</button>
-        <br>
-        <button data-binary="1" onclick="appendToInput('1')">1</button>
-        <button onclick="appendToInput('+')">+</button>
-        <button onclick="appendToInput('×')">×</button>
-        <button onclick="appendToInput('/')">/</button>
-        <br>
-        <button onclick="calculate()">=</button>
-      
-        <input type="text" id="outputField" readonly>
-        <br>
-        <footer>
-            <h5>Balanced Pentadecimal Calculator</h5>
-            <h6>- Version: 0.p6</h6>
-            <br>
-            <h6>as imagined by B.S.G.</h6>
-        </footer>
-    </div>
-
-                <script>
+<script>
     const pentadecimalSymbols = ['L', '9', '2', 'w', 'd', 'u', 'q', '0', '1', 'p', 'n', 'b', 'm', '5', '6', '7'];
     const pentadecimalValues = {
         'L': -7, '9': -6, '2': -5, 'w': -4, 'd': -3, 'u': -2, 'q': -1,
@@ -351,6 +227,9 @@
         document.getElementById('outputField').value = '';
     }
 </script>
+
+
+
 
 </body>
 </html>
