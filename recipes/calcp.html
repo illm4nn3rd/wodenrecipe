@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Balanced Pentadecimal Calculator</title>
+    <link href="https://fonts.googleapis.com/css2?family=Kurale&display=swap" rel="stylesheet">
+    <style>
+        body, button, input, footer {
+            font-family: 'Kurale', serif;
+            background-color: #e3c4a8; /* sage*/
+            color: #db4437; /* Dark brown text */
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            border: none;
+            box-sizing: border-box;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .calculator {
+            padding: 20px;
+            border: 2px solid #eda96e; /* Earthy brown border */
+        }
+
+        button {
+            padding: 10px 20px;
+            margin: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            border: 2px solid #8c7b6d;
+            background-color: #d3c0a6; /* Light brown */
+            color: #5C4033; /* Dark brown text */
+            font-weight: bold;
+        }
+
+        /* Desert Earth Tones for buttons */
+        button[data-pentadecimal="0"] { background-color: #e3c4a8; border: 2px solid #5C4033; } /* Lightest */
+        button[data-pentadecimal="p"], button[data-pentadecimal="q"] { background-color: #d2b48c; }
+        button[data-pentadecimal="n"], button[data-pentadecimal="u"] { background-color: #b08e75; color: #f4e9d8; }
+        button[data-pentadecimal="b"], button[data-pentadecimal="d"] { background-color: #a07c60; color: #f4e9d8; }
+        button[data-pentadecimal="m"], button[data-pentadecimal="w"] { background-color: #a07c60; color: #f4e9d8; border: 2px solid #5C4033; }
+        button[data-pentadecimal="5"], button[data-pentadecimal="2"] { background-color: #8f6a4d; color: #f4e9d8;  border: 2px solid #5C4033; }
+        button[data-pentadecimal="6"], button[data-pentadecimal="9"] { background-color: #8f6a4d; color: #f4e9d8;  border: 2px solid #5C4033; }
+        button[data-pentadecimal="7"], button[data-pentadecimal="L"] { background-color: #5C4033; color: #f4e9d8; /* Dark brown text */ }
+
+        /* Fractional button */
+        button[data-pentadecimal="."] { background-color: #e3c4a8; border: 2px solid #5C4033; }
+
+        /* Binary Decimal buttons */
+        button[data-binary="1"] { background-color: #e3c4a8; border: 2px solid #5C4033; }
+
+        /* Function keys */
+        button[onclick="appendToInput('+')"], button[onclick="appendToInput('×')"], button[onclick="appendToInput('/')"] { background-color: #5C4033; color: #edc9af; }
+        button[onclick="calculate()"], button[onclick="clearInput()"] { background-color: #b22222; color: #edc9af; border: 2px solid #5C4033; }
+
+        input {
+            width: 200px;
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #8c7b6d;
+            background-color: #f4e9d8;
+            color: #5a4634;
+        }
+
+        footer {
+            margin-top: 20px;
+            font-size: 0.6em;
+        }
+
+        h2 {
+            font-family: Arial, sans-serif;
+            color: #5a4634;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="calculator" style="vertical-align: top;">
+        <h2 align="right">B.P.C.</h2>
+        <input type="text" id="inputField" placeholder="Enter calculation">
+        <button onclick="clearInput()">C</button>
+        <br>
+        <button data-pentadecimal="L" onclick="appendToInput('L')" style="font-style: italic;">L</button>
+        <button data-pentadecimal="9" onclick="appendToInput('9')">9</button>
+        <button data-pentadecimal="6" onclick="appendToInput('6')">6</button>
+        <button data-pentadecimal="7" onclick="appendToInput('7')">7</button>
+        <br>
+        <button data-pentadecimal="." onclick="appendToInput('.')">.</button>
+        <button data-pentadecimal="q" onclick="appendToInput('q')">q</button>
+        <button data-pentadecimal="0" onclick="appendToInput('0')">0</button>
+        <button data-pentadecimal="p" onclick="appendToInput('p')">p</button>
+        <br>
+        <button data-pentadecimal="d" onclick="appendToInput('d')">d</button>
+        <button data-pentadecimal="u" onclick="appendToInput('u')">u</button>
+        <button data-pentadecimal="n" onclick="appendToInput('n')">n</button>
+        <button data-pentadecimal="b" onclick="appendToInput('b')">b</button>
+        <br>
+        <button data-pentadecimal="2" onclick="appendToInput('2')">2</button>
+        <button data-pentadecimal="w" onclick="appendToInput('w')">w</button>
+        <button data-pentadecimal="m" onclick="appendToInput('m')">m</button>
+        <button data-pentadecimal="5" onclick="appendToInput('5')">5</button>
+        <br>
+        <button data-binary="1" onclick="appendToInput('1')">1</button>
+        <button data-binary="0" onclick="appendToInput('0')">0</button>
+        <button onclick="appendToInput('+')">+</button>
+        <button onclick="appendToInput('×')">×</button>
+        <button onclick="appendToInput('/')">/</button>
+        <button onclick="calculate()">=</button>
+        <br>
+        <input type="text" id="outputField" readonly>
+        <br>
+        <footer>
+            <h5>Balanced Pentadecimal Calculator</h5>
+            <h6>- Version: 0.p5</h6>
+            <br>
+            <h6>as imagined by B.S.G.</h6>
+        </footer>
+    </div>
+
+    <script>
+        const pentadecimalSymbols = ['L', '9', '2', 'w', 'd', 'u', 'q', '0', 'p', 'n', 'b', 'm', '5', '6', '7'];
+        const pentadecimalValues = {
+            'L': -7, '9': -6, '2': -5, 'w': -4, 'd': -3, 'u': -2, 'q': -1,
+            '0': 0,
+            'p': 1, 'n': 2, 'b': 3, 'm': 4, '5': 5, '6': 6, '7': 7
+        };
+
+        function appendToInput(symbol) {
+            const inputField = document.getElementById('inputField');
+
+            if (symbol === '.') {
+                const currentInput = inputField.value;
+                const lastChar = currentInput.charAt(currentInput.length - 1);
+                if (!lastChar || ['+', '×', '/'].includes(lastChar)) {
+                    inputField.value += '0.';
+                } else if (!currentInput.includes('.')) {
+                    inputField.value += '.';
+                }
+            } else if (symbol === '1' || symbol === '0') {
+                inputField.value += symbol;
+            } else {
+                inputField.value += symbol;
+            }
+        }
+
+        function balancedToDecimal(pentadecimalStr) {
+            let decimalValue = 0;
+            let base = 1;
+            for (let i = pentadecimalStr.length - 1; i >= 0; i--) {
+                decimalValue += pentadecimalValues[pentadecimalStr[i]] * base;
+                base *= 15;
+            }
+            return decimalValue;
+        }
+
+        function decimalToBalanced(decimalValue) {
+            if (decimalValue === 0) return '0';
+            let pentadecimalStr = '';
+            while (decimalValue !== 0) {
+                let remainder = decimalValue % 15;
+                decimalValue = Math.floor(decimalValue / 15);
+                if (remainder > 7) {
+                    remainder -= 15;
+                    decimalValue += 1;
+                } else if (remainder < -7) {
+                    remainder += 15;
+                    decimalValue -= 1;
+                }
+                pentadecimalStr = pentadecimalSymbols[remainder + 7] + pentadecimalStr;
+            }
+            return pentadecimalStr;
+        }
+
+        function calculate() {
+            const inputField = document.getElementById('inputField');
+            const inputStr = inputField.value;
+
+            let operands, operation;
+            if (inputStr.includes('+')) {
+                operands = inputStr.split('+');
+                operation = '+';
+            } else if (inputStr.includes('×')) {
+                operands = inputStr.split('×');
+                operation = '×';
+            } else if (inputStr.includes('/')) {
+                operands = inputStr.split('/');
+                operation = '/';
+            } else {
+                return;
+            }
+
+            const operand1Decimal = balancedToDecimal(operands[0]);
+            const operand2Decimal = balancedToDecimal(operands[1]);
+
+            let resultDecimal;
+            switch (operation) {
+                case '+':
+                    resultDecimal = operand1Decimal + operand2Decimal;
+                    break;
+                case '×':
+                    resultDecimal = operand1Decimal * operand2Decimal;
+                    break;
+                case '/':
+                    resultDecimal = operand1Decimal / operand2Decimal;
+                    break;
+            }
+
+            const resultPentadecimal = decimalToBalanced(resultDecimal);
+
+            document.getElementById('outputField').value = resultPentadecimal;
+        }
+
+        function clearInput() {
+            const inputField = document.getElementById('inputField');
+            inputField.value = '';
+            document.getElementById('outputField').value = '';
+        }
+    </script>
+</body>
+</html>
