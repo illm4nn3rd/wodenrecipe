@@ -137,7 +137,20 @@
     const inputField = document.getElementById('inputField');
     const currentInput = inputField.value;
 <!-- Inside appendToInput function -->
-if (symbol === '.') {
+// Inside appendToInput function
+if (symbol === '0') {
+    inputField.value += symbol;
+} else if (symbol === '.') {
+    // ... existing code
+} else {
+    // Simplified binary decimal check
+    const regex = /(?:[×/])?[0-9.]+[1-9][0-9]*[b]/;
+    if (regex.test(currentInput) || currentInput === '' || lastChar === 'b') {
+        inputField.value += symbol;
+    }
+}
+
+        if (symbol === '.') {
     const lastChar = currentInput.charAt(currentInput.length - 1);
     const hasDecimal = currentInput.includes('.');
     if (!lastChar || ['+', '×', '/'].includes(lastChar) || !hasDecimal) {
