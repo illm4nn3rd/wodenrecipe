@@ -36,14 +36,14 @@
             document.getElementById("version1").innerText = "Version 1: " + version1;
             var base10Representation1 = convertToBase69(version1);
             document.getElementById("base10Representation1").innerText = "Base 10 Representation: " + base10Representation1;
-            var transformation1 = calculateTransformation(base10Representation1, 8);
+            var transformation1 = calculateTransformation(base10Representation1, 18);
             document.getElementById("transformation1").innerText = "Transformation: " + transformation1;
             document.getElementById("backToBase69_1").innerText = "Back to Base 69: " + convertBackToBase69(transformation1);
 
             document.getElementById("version2").innerText = "Version 2: " + version2;
             var base10Representation2 = convertToBase69(version2);
             document.getElementById("base10Representation2").innerText = "Base 10 Representation: " + base10Representation2;
-            var transformation2 = calculateTransformation(base10Representation2, 16);
+            var transformation2 = calculateTransformation(base10Representation2, 32);
             document.getElementById("transformation2").innerText = "Transformation: " + transformation2;
             document.getElementById("backToBase69_2").innerText = "Back to Base 69: " + convertBackToBase69(transformation2);
 
