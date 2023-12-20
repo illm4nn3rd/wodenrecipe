@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Complex Password Permutation Generator</title>
+    <script>
+        function customBase69ToBase10Conversion(input) {
+            // Define the custom base-69 set
+            const base69Set = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$%^&*(";
+
+            // Convert the input to uppercase for case-insensitivity
+            const uppercaseInput = input.toUpperCase();
+
+            let base10Representation = 0;
+            let power = uppercaseInput.length - 1;
+
+            for (let i = 0; i < uppercaseInput.length; i++) {
+                const char = uppercaseInput[i];
+                const charValue = base69Set.indexOf(char);
+                
+                if (charValue === -1) {
+                    // Invalid character, handle as needed (skip, show error, etc.)
+                    continue;
+                }
+
+                base10Representation += charValue * Math.pow(69, power);
+                power--;
+            }
+
+            return base10Representation;
+        }
+
+        function generatePermutations() {
+            const inputPassword = document.getElementById("inputPassword").value;
+
+            // Low level permutation: add current year to the end of the string
+            const lowLevelPermutation = inputPassword + (new Date().getFullYear());
+
+            // Medium level permutation: change capitalization every 2 characters
+            let mediumLevelPermutation = "";
+            for (let i = 0; i < inputPassword.length; i++) {
+                mediumLevelPermutation += (i % 2 === 0) ? inputPassword[i].toLowerCase() : inputPassword[i].toUpperCase();
+            }
+
+            // High level permutation: add "!!" at the beginning and end of the string
+            const highLevelPermutation = "!!" + inputPassword + "!!";
+
+            // Convert each permutation to base-69 and display the corresponding base-10 representations
+            document.getElementById("lowLevelResult").innerText = `Low Level: ${customBase69ToBase10Conversion(lowLevelPermutation)}`;
+            document.getElementById("mediumLevelResult").innerText = `Medium Level: ${customBase69ToBase10Conversion(mediumLevelPermutation)}`;
+            document.getElementById("highLevelResult").innerText = `High Level: ${customBase69ToBase10Conversion(highLevelPermutation)}`;
+        }
+    </script>
+</head>
+<body>
+    <h2>Complex Password Permutation Generator</h2>
+
+    <label for="inputPassword">Enter a Complex Password:</label>
+    <input type="text" id="inputPassword" placeholder="Input password">
+
+    <button onclick="generatePermutations()">Generate Permutations</button>
+
+    <div id="lowLevelResult"></div>
+    <div id="mediumLevelResult"></div>
+    <div id="highLevelResult"></div>
+</body>
+</html>
