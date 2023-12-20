@@ -29,48 +29,33 @@
             return base10Representation;
         }
 
-        function base10ToBase35Conversion(base10Number) {
-            const base35Set = "0123456789abcdefghijklmnopqrstuvwxyz";
-            let base35Representation = "";
-
-            while (base10Number > 0) {
-                const remainder = base10Number % 35;
-                base35Representation = base35Set[remainder] + base35Representation;
-                base10Number = Math.floor(base10Number / 35);
-            }
-
-            return base35Representation || "0";
+        function displayXForPermutation(permutationType, x) {
+            const resultElement = document.getElementById(`${permutationType}Result`);
+            resultElement.innerText = `${permutationType} Level: k = 1260 * (15^${x}), x = ${x}`;
         }
 
         function generatePermutations() {
             const inputPassword = document.getElementById("inputPassword").value;
 
-            // Low level permutation: change capitalization and associate numbers with symbols
-            let lowLevelPermutation = "";
+            // Low level permutation: add current year to the end of the string
+            const lowLevelPermutation = inputPassword + (new Date().getFullYear());
+            const lowLevelX = customBase69ToBase10Conversion(lowLevelPermutation);
+
+            // Medium level permutation: change capitalization every 2 characters
+            let mediumLevelPermutation = "";
             for (let i = 0; i < inputPassword.length; i++) {
-                const char = inputPassword[i];
-                if (/[a-z]/.test(char)) {
-                    lowLevelPermutation += char.toUpperCase();
-                } else if (/[A-Z]/.test(char)) {
-                    lowLevelPermutation += char.toLowerCase();
-                } else if (/[0-9]/.test(char)) {
-                    // Map numbers to symbols (1:!, 2:@, ..., 9:())
-                    lowLevelPermutation += String.fromCharCode(char.charCodeAt(0) + 32); // Map 1-9 to ASCII symbols
-                } else {
-                    lowLevelPermutation += char;
-                }
+                mediumLevelPermutation += (i % 2 === 0) ? inputPassword[i].toLowerCase() : inputPassword[i].toUpperCase();
             }
+            const mediumLevelX = customBase69ToBase10Conversion(mediumLevelPermutation);
 
-            // Medium level permutation: add current year to low level permutation
-            const mediumLevelPermutation = lowLevelPermutation + (new Date().getFullYear());
+            // High level permutation: add "!!" at the beginning and end of the string
+            const highLevelPermutation = "!!" + inputPassword + "!!";
+            const highLevelX = customBase69ToBase10Conversion(highLevelPermutation);
 
-            // High level permutation: add "!!" at the beginning and end of medium level permutation
-            const highLevelPermutation = "!!" + mediumLevelPermutation + "!!";
-
-            // Convert each permutation to base-69 and then to base-35
-            document.getElementById("lowLevelResult").innerText = `Low Level: ${base10ToBase35Conversion(customBase69ToBase10Conversion(lowLevelPermutation))}`;
-            document.getElementById("mediumLevelResult").innerText = `Medium Level: ${base10ToBase35Conversion(customBase69ToBase10Conversion(mediumLevelPermutation))}`;
-            document.getElementById("highLevelResult").innerText = `High Level: ${base10ToBase35Conversion(customBase69ToBase10Conversion(highLevelPermutation))}`;
+            // Display x for each permutation
+            displayXForPermutation("Low", lowLevelX);
+            displayXForPermutation("Medium", mediumLevelX);
+            displayXForPermutation("High", highLevelX);
         }
     </script>
 </head>
