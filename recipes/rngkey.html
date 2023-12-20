@@ -16,12 +16,13 @@
     <p id="version1"></p>
     <p id="version2"></p>
     <p id="version3"></p>
+    <p id="base10Representation"></p>
 
     <script>
         function modifyString() {
             var inputString = document.getElementById("inputString").value;
             var version1 = inputString + "4146";
-            var version2 = modifyCaseAndSymbols(inputString);
+            var version2 = modifyCaseAndSymbols(inputString + "4146");
             var version3 = "!!" + version2 + "!!";
 
             document.getElementById("version1").innerText = "Version 1: " + version1;
@@ -30,7 +31,7 @@
 
             // Convert to base69 and display base 10
             var base69Number = convertToBase69(version2);
-            alert("Base 10 Representation: " + base69Number);
+            document.getElementById("base10Representation").innerText = "Base 10 Representation: " + base69Number;
         }
 
         function modifyCaseAndSymbols(inputString) {
