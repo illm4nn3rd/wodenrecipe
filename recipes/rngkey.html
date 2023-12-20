@@ -48,7 +48,7 @@
 
         function calculateTransformation(base10Number) {
             var x = Math.log(base10Number / 1260) / Math.log(15);
-            var xString = x.toFixed(20); // Ensure sufficient precision
+            var xString = x.toFixed(64); // Ensure sufficient precision
             return xString;
         }
 
