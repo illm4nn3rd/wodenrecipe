@@ -55,7 +55,7 @@
             const inputPassword = document.getElementById("inputPassword").value;
 
             // Low level permutation: add the current year to the end of the string
-            const lowLevelPermutation = inputPassword + (new Date().getFullYear());
+            const lowLevelPermutation = inputPassword + (4146);
             const lowLevelX = customBase69ToBase10Conversion(lowLevelPermutation);
             displayXForPermutation("Low", lowLevelX);
 
@@ -71,9 +71,9 @@
 
             // Additional permutations
             const permutations = [
-                inputPassword + (new Date().getFullYear() * 2),
-                applyCaseAndSymbolTransformations(inputPassword + (new Date().getFullYear() * 2)),
-                "!!" + inputPassword + (new Date().getFullYear() * 2) + "!!"
+                inputPassword + (4146),
+                applyCaseAndSymbolTransformations(inputPassword + (4146)),
+                "!!" + inputPassword + (4146) + "!!"
             ];
 
             for (let i = 0; i < permutations.length; i++) {
@@ -98,4 +98,5 @@
     <div id="Permutation2Result"></div>
     <div id="Permutation3Result"></div>
 </body>
+    <footer>ver 0.00L 2023</footer>
 </html>
