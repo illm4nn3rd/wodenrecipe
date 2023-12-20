@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Base 10 to Base 69 Converter</title>
+</head>
+<body>
+    <h1>Base 10 to Base 69 Converter</h1>
+    
+    <label for="decimalInput">Enter a decimal number:</label>
+    <input type="number" id="decimalInput">
+    <button onclick="convertToBase69()">Convert</button>
+
+    <h2>Base 69 Representation:</h2>
+    <p id="base69Result"></p>
+
+    <script>
+        function convertToBase69() {
+            var decimalInput = document.getElementById("decimalInput").value;
+            var base69Result = convertToBase69String(decimalInput);
+            document.getElementById("base69Result").innerText = "Base 69 Representation: " + base69Result;
+        }
+
+        function convertToBase69String(decimalNumber) {
+            var base69Chars = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$%^&*(";
+            var base69Result = "";
+
+            while (decimalNumber > 0) {
+                var remainder = decimalNumber % 69;
+                base69Result = base69Chars.charAt(remainder) + base69Result;
+                decimalNumber = Math.floor(decimalNumber / 69);
+            }
+
+            return base69Result === "" ? "0" : base69Result;
+        }
+    </script>
+</body>
+</html>
