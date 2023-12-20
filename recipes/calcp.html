@@ -133,6 +133,7 @@
         };
 
         function appendToInput(symbol) {
+    const inpufunction appendToInput(symbol) {
     const inputField = document.getElementById('inputField');
     const currentInput = inputField.value;
 
@@ -145,7 +146,7 @@
         }
     } else if (symbol === '1' || symbol === '0') {
         // Add binary decimal digits after binary decimal point
-        const regex = /(?:[×/])?[0-9.]+[1-9][0-9]*[b]/;
+        const regex = /(?:[×/])?[0-9.]*[b]/;
         if (regex.test(currentInput)) {
             inputField.value += symbol;
         } else {
@@ -155,6 +156,7 @@
         inputField.value += symbol;
     }
 }
+
 
 
         function balancedToDecimal(pentadecimalStr) {
