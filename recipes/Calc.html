@@ -121,7 +121,7 @@
         <br>
         <footer>
             <h5>Balanced Pentadecimal Calculator</h5>
-            <h6>- Version: 0.p6L</h6>
+            <h6>- Version: 0.p69</h6>
             <br>
             <h6>as imagined by B.S.G.</h6>
         </footer>
@@ -173,48 +173,52 @@
 // ... (Previous code)
 
 // Logic to handle fractional input
+
+        
+
 function handleFractionalInput() {
-    const inputField = document.getElementById('inputField');
-    const inputStr = inputField.value;
+            const inputField = document.getElementById('inputField');
+            const inputStr = inputField.value;
 
-    const parts = inputStr.split('.');
-    if (parts.length === 2) {
-        const integerPart = parts[0];
-        const fractionalPart = parts[1];
+            const parts = inputStr.split('.');
+            if (parts.length === 2) {
+                const integerPart = parts[0];
+                const fractionalPart = parts[1];
 
-        const integerDecimal = balancedToDecimal(integerPart);
-        const fractionalDecimal = balancedToDecimal(fractionalPart) / Math.pow(15, fractionalPart.length);
+                const integerDecimal = balancedToDecimal(integerPart);
+                const fractionalDecimal = balancedToDecimal(fractionalPart) / Math.pow(15, fractionalPart.length);
 
-        const totalDecimal = integerDecimal + fractionalDecimal;
-        const totalPentadecimal = decimalToBalanced(totalDecimal);
+                const totalDecimal = integerDecimal + fractionalDecimal;
+                const totalPentadecimal = decimalToBalanced(totalDecimal);
 
-        document.getElementById('outputField').value = totalPentadecimal;
-    }
-}
-
-// Logic to handle binary.decimal input
-function handleBinaryDecimalInput() {
-    const inputField = document.getElementById('inputField');
-    const inputStr = inputField.value;
-
-    if (inputStr.includes('.')) {
-        const parts = inputStr.split('.');
-
-        // Ensure there are two parts (integer and fractional)
-        if (parts.length === 2) {
-            const integerPart = parts[0];
-            const fractionalPart = parts[1];
-
-            const integerDecimal = balancedToDecimal(integerPart);
-            const fractionalDecimal = balancedToDecimal(fractionalPart) / Math.pow(15, fractionalPart.length);
-
-            const totalDecimal = integerDecimal + fractionalDecimal;
-            const totalPentadecimal = decimalToBalanced(totalDecimal);
-
-            document.getElementById('outputField').value = totalPentadecimal;
+                document.getElementById('outputField').value = totalPentadecimal;
+            }
         }
-    }
-}
+
+        // Logic to handle binary.decimal input
+        function handleBinaryDecimalInput() {
+            const inputField = document.getElementById('inputField');
+            const inputStr = inputField.value;
+
+            if (inputStr.includes('.')) {
+                const parts = inputStr.split('.');
+
+                // Ensure there are two parts (integer and fractional)
+                if (parts.length === 2) {
+                    const integerPart = parts[0];
+                    const fractionalPart = parts[1];
+
+                    const integerDecimal = balancedToDecimal(integerPart);
+                    const fractionalDecimal = balancedToDecimal(fractionalPart) / Math.pow(15, fractionalPart.length);
+
+                    const totalDecimal = integerDecimal + fractionalDecimal;
+                    const totalPentadecimal = decimalToBalanced(totalDecimal);
+
+                    document.getElementById('outputField').value = totalPentadecimal;
+                }
+            }
+        }
+
 
 // ... (Remaining code)
 
