@@ -22,4 +22,3 @@ function displayResult(result) {
     const resultContainer = document.getElementById('result');
     resultContainer.textContent = `Generated Pentadecimal Number: ${result}`;
 }
-
