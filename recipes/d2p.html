@@ -36,14 +36,23 @@
     </div>
 
     <script>
+
+        // Define the symbols and their corresponding values for balanced pentadecimal
+        const pentadecimalSymbols = ['L', '9', '2', 'w', 'd', 'u', 'q', '0', 'p', 'n', 'b', 'm', '5', '6', '7'];
+        const pentadecimalValues = {
+            'L': -7, '9': -6, '2': -5, 'w': -4, 'd': -3, 'u': -2, 'q': -1,
+            '0': 0,
+            'p': 1, 'n': 2, 'b': 3, 'm': 4, '5': 5, '6': 6, '7': 7
+        };
+        
         function convertToUndecimal() {
     let decimalValue = parseInt(document.getElementById("decimalInput").value);
-    let undecimalValue = "";
-    const symbols = ["L", "9", "2", "w", "d", "u", "q", "o", "p", "n", "b", "m", "5", "6", "7"];
+    let pentadecimalValue = "";
     
+            
     while (decimalValue !== 0) {
-        let remainder = decimalValue % 11;
-        let quotient = Math.floor(decimalValue / 11);
+        let remainder = decimalValue % 15;
+        let quotient = Math.floor(decimalValue / 15);
         
         // Balancing the remainder
         if (remainder > 7) {
@@ -55,7 +64,7 @@
         }
         
         // Map the balanced remainder to the correct symbol
-        undecimalValue = symbols[remainder + 7] + undecimalValue;
+        pentadecimalValue = symbols[remainder + 7] + pentadecimalValue;
         
         // Update the number for the next iteration
         decimalValue = quotient;
